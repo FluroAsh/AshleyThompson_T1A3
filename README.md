@@ -11,10 +11,9 @@ The user(s) this application is most appropriate for are movie enthusiasts that 
 The above user will make use of the application by entering a movie title which will concatenated into a link that will search through our API and return a list of **movie-items** that contain relevant information for the user. When they receive this information they will have the option to select one of these movies and append it to a **favourites list**. 
 
 
-# List of Features
-
+# ~List of Features
 1. User **login** feature
-   1. Allows user to enter **Username** + **Password** to retrieve associated relevant *favourite* movies.
+   1. Allows user to enter **Username** + **Password** to retrieve associated relevant *favourite* movies
    2. No actual database implementation, simply stored in the form of JSON document
 
 2. __Search__ [movie-database](https://rapidapi.com/rapidapi/api/movie-database-imdb-alternative/) for matching Title that is input by the user
@@ -22,8 +21,12 @@ The above user will make use of the application by entering a movie title which 
 3. Allow to select & store a **favourite movie** and attach it to their credentials 
    1. Stored in separate file 
 
-# Develop an Outline of the User Interaction and Experience for the Application
-## Find Out How to Interact with Each Future
+4. Navigation by utilising the [tty-prompt](https://github.com/piotrmurach/tty-prompt) gem
+   1. Allows user to easily navigate through various options to continue/change/break flow of the application
+   2. Added bonus, using `.mask` method user will have their password masked when prompted at time of input!
+
+# !Develop an Outline of the User Interaction and Experience for the Application
+## How Will User Find Out How to Interact with Each Feature
 
 ## How User will Interact with Each Feature
 
@@ -34,24 +37,62 @@ The above user will make use of the application by entering a movie title which 
 - how the user will interact with / use each feature
 - how errors will be handled by the application and displayed to the user
 
-# Diagram that describes the control flow
+# !Diagram that describes the control flow
 ## Must:
-
 - show the workflow/logic and/or integration of the features in your application for each feature.
 - utilise a recognised format or set of conventions for a control flow diagram, such as UML.
 
-# Develop an Implementation Plan
+# !Develop an Implementation Plan
 ## Which will: 
 
 - outlines how each feature will be implemented and a checklist of tasks for each feature
 - prioritise the implementation of different features, or checklist items within a feature
 - provide a deadline, duration or other time indicator for each feature or checklist/checklist-item
+1. F1
+2. F2
+3. F3
 
-Utilise a suitable project management platform to track this implementation plan
+The current method to track this implementation plan will be done through a [Trello board](https://trello.com/b/W2bSAate/t1a3ashleythompson).
 
 > Your checklists for each feature should have at least 5 items.
 
 # Help Documentation
+## Installation
+To install this application you can clone the repo into your current directory by utilising the `git clone` command:
+
+    $ git clone git@github.com:FluroAsh/AshleyThompson_T1A3.git
+
+## Usage
+You can either run the application through a shell terminal using:
+    
+    $ ruby movie-app.rb
+or alternatively execute the run bash script which will automate this for you:
+
+    $ ./run.sh
+
+To execute either of these commands your current directory must be `src`.
+## Dependencies 
+    $ ./install-dependencies
+This will install the required gems for the application to run without errors.
+
+The required gemlist includes:
+- [colorize](https://github.com/fazibear/colorize)
+- [terminal-table](https://github.com/tj/terminal-table)
+- [tty-prompt](https://github.com/piotrmurach/tty-prompt)
+- [rspec](https://github.com/rspec/rspec-core)
+
+## System/Hardware Requirements
+Minimum Requirements:
+- 32-bit OS
+- 1GHz Processor or faster
+- 2GB Ram
+- 1GB of HDD space
+## Supported Operating Systems
+- Windows 
+- Linux
+- MacOS
+### Supported:
+
 You must include:
 - steps to install the application
 - any dependencies required by the application to operate
