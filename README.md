@@ -30,6 +30,9 @@ The above user will make use of the application by entering a movie title which 
 ## How Will User Find Out How to Interact with Each Feature
 
 ## How User will Interact with Each Feature
+The user will interact with each feature via the [tty-prompt](https://github.com/piotrmurach/tty-prompt) interface, selecting various options that dictate the flow of the application. The first stage is the login feature which will allow dynamic retrieval of user data (favourites, as-well as validation of their credentials). 
+
+At various stages of the applications run-time it will prompt the user for input to retrieve data from the [movie API](https://rapidapi.com/rapidapi/api/movie-database-imdb-alternative/) and subsequently display it to the user, allowing them to store a movie item into the favourites.txt document that will be later used to retrieve a list of the user's preferences. 
 
 ## How Errors Will be Handled
 Errors will be predominately handled by the `rescue` method, by catching errors as they arise in blocks of code. Alternatively, errors will be prevented/handled by anticipating how the user will interact with the application and diverting the control flow in a way that allows the user to continue their interaction without exiting (eg: failing a login attempt, and being able to retry).
@@ -39,10 +42,9 @@ Errors will be predominately handled by the `rescue` method, by catching errors 
 - how the user will interact with / use each feature
 - how errors will be handled by the application and displayed to the user
 
-# !Diagram that describes the control flow
-## Must:
-- show the workflow/logic and/or integration of the features in your application for each feature.
-- utilise a recognised format or set of conventions for a control flow diagram, such as UML.
+# Control Flow Diagram
+This control flow diagram serves to express what the application intends to do, how the user will interact with it and show the overall process from start to finish given various divergences in the control flow. The diagrams logic may be subject to slight change during the development process to facilitate better user experience and optimisation.
+![Control Flow Diagram](../docs/../AshleyThompson_T1A3/docs/control-flow-diagram.png)
 
 # !Develop an Implementation Plan
 ## Which will: 
