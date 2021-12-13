@@ -2,6 +2,7 @@ require_relative './lib/environment'
 
 class User
     attr_reader :username
+
     
     def initialize(username, password)
         @username = username
@@ -11,27 +12,68 @@ class User
         # @logged_in = logged_in
     end
 
-    def welcome
-        # ASCII Art Welcome Message Will Go Here!!!
-        ## Not a priority currently
-        puts "Welcome!"
+    def self.welcome
+        puts "
+        ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░▒▒▒▒░░░▒▒▒▒░░░░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒░▒▒▒▒▒▒░░░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒░░░░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒░░░░░░░▓▓  ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ ██ 
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒░░░░░░░░░▓▓  ██     ██ ██      ██      ██      ██    ██ ████  ████ ██      ██
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░░░░░░░▓▓  ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████   ██
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓  ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██        
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒░▒▒▒░░░▓▓   ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████ ██
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒░░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒░░░░░▓▓
+        ▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░░▓▓
+        ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+        _______▒__________▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+        ______▒_______________▒▒▒▒▒▒▒▒
+        _____▒________________▒▒▒▒▒▒▒▒
+        ____▒___________▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+        ___▒
+        __▒______▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+        _▒______▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓
+        ▒▒▒▒___▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓
+        ▒▒▒▒__▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓▒▓
+        ▒▒▒__▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+        ▒▒
+        ".colorize(:green)
     end
 
-    def get_username
-        @username
+    def self.get_username
+        print "Username: ".colorize(:cyan)
+        username = gets.chomp.strip.capitalize.to_s        
+    end
+
+    # BUGGED at the moment
+    def self.get_password
+        password = PROMPT.mask("Password:".colorize(:cyan), mask: dot) do |q| 
+            # At-least 6 characters followed by a number; https://stackoverflow.com/questions/11992544/validating-password-using-regex
+            q.validate (/^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/)
+            q.messages[:valid?] =  "Must contain at-least 6 characters and 1 number".colorize(:red)
+        end
     end
 
     def validate_login 
         user_data = File.read(@file_path)
         temp_json = JSON.parse(user_data)
         
-        result = temp_json["user_data"].find { |h1| h1["username"] if h1["username"] == @username} ?  true : false
-        return result
+        @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username} ? true : false
+        @password_check = temp_json["user_data"].find { |h1| h1["password"] == @password} ? true : false
+        
+        @username_check && @password_check
+
     end
 
     def save_login
-        if validate_login() == false
-            puts "No match, creating new login..."
+        if @username_check == false # False as we're checking to see if there is NO match — ie no current existing username
+            puts "No match, creating new login ✅"
+            
             new_user = {username: @username, password: @password}
         
             user_data = File.read(@file_path)
@@ -42,7 +84,7 @@ class User
                 f.puts JSON.pretty_generate(temp_json)
             end
         else
-            puts "Username already in use, please try again"
+            raise StandardError   
         end
     end
 

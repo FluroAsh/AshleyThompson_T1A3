@@ -1,9 +1,11 @@
 #!/bin/bash
+gem update --system
 gem install bundler 
 bundle install
 bundle init
-bundle add json
 bundle add colorize
 bundle add terminal-table
 bundle add tty-prompt
-echo "***Process completed!***"
+bundle add whirly
+bundle add paint
+echo "***Process complete!***"

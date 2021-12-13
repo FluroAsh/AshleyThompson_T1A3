@@ -5,16 +5,28 @@
       "password": "12345"
     },
     {
-      "username": "Test",
-      "password": "12345"
+      "username": "Larry",
+      "password": "foobar123"
     },
     {
-      "username": "Jimmy",
-      "password": "Neutron"
+      "username": "Test",
+      "password": "foobar123"
     },
     {
       "username": "Admin",
-      "password": "Admin"
+      "password": "foobar123"
+    },
+    {
+      "username": "John",
+      "password": "foobar123"
+    },
+    {
+      "username": "Administrator",
+      "password": "foobar123"
+    },
+    {
+      "username": "Big rock",
+      "password": "foobar123"
     }
   ]
 }
