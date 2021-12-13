@@ -1,10 +1,6 @@
 {
   "user_data": [
     {
-      "username": "Ashley",
-      "password": "12345"
-    },
-    {
       "username": "Larry",
       "password": "foobar123"
     },
@@ -14,18 +10,6 @@
     },
     {
       "username": "Admin",
-      "password": "foobar123"
-    },
-    {
-      "username": "John",
-      "password": "foobar123"
-    },
-    {
-      "username": "Administrator",
-      "password": "foobar123"
-    },
-    {
-      "username": "Big rock",
       "password": "foobar123"
     }
   ]
