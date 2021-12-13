@@ -11,6 +11,18 @@
     {
       "username": "Admin",
       "password": "foobar123"
+    },
+    {
+      "username": "Ashley",
+      "password": "foobar123"
+    },
+    {
+      "username": "Mrlemons",
+      "password": "foobar123"
+    },
+    {
+      "username": "Big rock",
+      "password": "foobar123"
     }
   ]
 }

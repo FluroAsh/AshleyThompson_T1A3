@@ -17,6 +17,6 @@ require 'json'
 # Config for Whirly
 Whirly.configure spinner: "dots12"
 
-# Creates new instance of TTY Prompt
+# Prompt instance & Dot constant
 PROMPT = TTY::Prompt.new(active_color: :magenta)
 DOT = PROMPT.decorate(PROMPT.symbols[:dot] + "", :yellow)
