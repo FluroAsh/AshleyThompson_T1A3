@@ -44,7 +44,7 @@ Errors will be predominately handled by the `rescue` method, by catching errors 
 This control flow diagram serves to express what the application intends to do, how the user will interact with it and show the overall process from start to finish given various divergences in the control flow. The diagrams logic may be subject to slight change during the development process to facilitate better user experience and optimisation.
 ![Control Flow Diagram](../docs/../AshleyThompson_T1A3/docs/control-flow-diagram.png)
 
-# !Develop an Implementation Plan
+# Develop an Implementation Plan
 ## Which will: 
 
 - outlines how each feature will be implemented and a checklist of tasks for each feature
@@ -103,8 +103,6 @@ This control flow diagram serves to express what the application intends to do, 
 
 The current method to track this implementation plan will be done through a [Trello board](https://trello.com/b/W2bSAate/t1a3ashleythompson).
 
-> Your checklists for each feature should have at least 5 items.
-
 # Help Documentation
 ## Installation
 To install this application clone the repo into your current directory by using the `git clone` command:
@@ -142,9 +140,3 @@ Minimum Requirements:
 - Windows 
 - Linux
 - MacOS
-### Supported:
-
-You must include:
-- steps to install the application
-- any dependencies required by the application to operate
-- any system/hardware requirements
