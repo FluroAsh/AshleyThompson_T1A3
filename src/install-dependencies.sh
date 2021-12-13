@@ -2,7 +2,7 @@
 gem install bundler 
 bundle install
 bundle init
-bundle add rspec
+bundle add json
 bundle add colorize
 bundle add terminal-table
 bundle add tty-prompt
