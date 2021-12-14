@@ -13,7 +13,6 @@ when "Login"
             password = User.get_password
         
             user = User.new(username, password)
-            
             user.validate_login
             
             if user.logged_in
@@ -37,7 +36,6 @@ when "Register"
         password = User.get_password
     
         user = User.new(username, password)
-        
         user.validate_login
         user.save_login
     rescue StandardError

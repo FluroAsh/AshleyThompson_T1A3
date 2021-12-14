@@ -13,7 +13,31 @@ class User
     end
 
     def self.welcome
-        puts "Welcome".colorize(:green)
+        puts "
+            iWWMMMMBt+++VBMBRBVBXXXBBBMMMMMMBMMMM
+            iWMRRXRRI+IVBXXBBBBBBRBXXRBMBMRXXXBBBMMMM
+        VWMRYiYVXtIRBBBBMMMMMMMMMMMMWWMMMBXYtIYXMBB
+        =RWWWBI  =BRXXRRRBBMMMMMMMWMMMMMMMMBBBRVVXRXRV
+        tWWMWWWY ;WBXVXXRRBBMMMMMMWWWMMWWWWMMMBRRXXXVVI
+    +WWWMMWWX;VBVIVVXRRRMMMWWWWWWWMMWWWWMMMBRRBRRRVi
+    MWWWWBRMBYXVVXI+;;+iIXBWWWWWWWWWWWWWWMMBBBRBBBBMI
+    XWWWWMVRXVt;t+=IXBRRYi=iVMWWWWWWMXVYIYVYVBBBBBBRBMBI
+    ,MWMWBYXXRBR=.=tYVBMMWMV=+RMWWWWBXVIVRRRRViIBBRBXYMWWV
+    MWRRItRBMMMM::+,+ttIVVMM;iBMWWMRRMMWWMBRRRYiVVtVVRBMY
+    MWXtX=tMMMMMIt,.:=tYBMRBBIBWWMMMVIItXBMXVVI+tIiI:YRXMB
+    WMBIiR+YtBBMXRBMMMMMMMBRYRMWMMMMWWXti,.;tItIIYYiRRBBMMV
+    ,MWMMtIRR=,+XBBMMMMMMMMWR:;RWWBRMMWWWMBRXYXBBXYYV+VMWMBMMM
+    VWMMi::BW,  IIRMMMMWWWWX+..,I+:iMMWWWWWWMMMBBRXVXYRMMWMBMMX
+    +WMMY::,BX   :RMBMMMWWMMRYVVXMWBXVMWWWWWWWMMBRXXXXYIRMBMMBBMR
+    =WMBBi:tt    tBBRBBMMMMRYtitYYVXMWWWWWMWWMMBXXVYXVi:VMMMMMMWV
+    RWRV+,;,,   XBRRRBBBt,..:+t=+:..+RWWWWWMBBXVVVXXIiI:IVMMBMMMW
+    IMRBRRBMB=  YXRRRBBBB,..+YBBBBV...=MWWMBBRRVVXXBYXRRBXBMMBMMMB
+    tMYitIXMi    iYXXRXRBRt;.:itt=:=iXMWWWMBBRRVXXRRVRMWWMMMMMMBBB
+    :MR:.,:Ii      YVVXRBBBMMRRRBMWMMMMMMMMBBRXXXYY+VMXMWMBMMBBVVRI
+    :RY+            iVRBBBBMMMWWWMMMMMMMBBBBRRXVt.iXYRYXMBBBYItVVt
+    =XVY,            ;tVRBBMMMWWWMMMMBMBBBBXVYt  iXBMWWMRVXYXMMY
+    RX:,              ,,;+tIIVXRBBRXVVIIi=,.=  iYYt+;,;iYRMMXt
+    ".colorize(:green)
     end
 
     def self.get_username
@@ -40,24 +64,33 @@ class User
     end
 
     def save_login
-        if @username_check == false
-            puts ">> No match, creating new login ✅".colorize(:green)
-            puts "-----------------------------------------"
+        begin
+            if @username_check == false
+                puts ">> No match, creating new login ✅".colorize(:green)
+                puts "-----------------------------------------"
+                
+                new_user = {username: @username, password: @password}
             
-            new_user = {username: @username, password: @password}
-        
-            user_data = File.read(@file_path)
-            temp_json = JSON.parse(user_data)
-            temp_json["user_data"] << new_user
+                user_data = File.read(@file_path)
+                temp_json = JSON.parse(user_data)
+                temp_json["user_data"] << new_user
 
-            File.open(@file_path, "w") do |f|
-                f.puts JSON.pretty_generate(temp_json)
+                File.open(@file_path, "w") do |f|
+                    f.puts JSON.pretty_generate(temp_json)
+                end
+            else
+                raise StandardError   
             end
-        else
-            raise StandardError   
         end
     end
 
-    def search_movie; end
+    def search_movie
+        # Get title from user
+        # Initialize into movie-items
+
+        # puts "What movie are you looking for?"
+        # print ">> "
+        # movie = gets.chomp.gsub(/\s+/, '%20')
+    end
 
 end
