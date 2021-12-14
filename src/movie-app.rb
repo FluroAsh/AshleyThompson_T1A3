@@ -1,7 +1,6 @@
 require_relative './lib/environment'
 
-while true  # Loops menu until 'exit' condition is found
-# TODO: Include validation for exiting 'login' or 'register' 
+while true  # Loops unless our ternary operator returns 'break'
     system("clear")
     User.welcome
     login_register = PROMPT.select("", %w(Login Register Exit))
@@ -12,25 +11,27 @@ while true  # Loops menu until 'exit' condition is found
         username = User.get_username
         password = User.get_password
         user = User.new(username, password)
+        
         user.validate_login
-        break
+        user.logged_in ? break : next 
             
     when "Register"
         system("clear")
         username = User.get_username
         password = User.get_password
         user = User.new(username, password)
+        
         user.save_login
-        break
+        user.logged_in ? break : next 
            
     when "Exit"
         exit 
     end
 end
 
-while user.logged_in
-    PROMPT.keypress("(Press space or enter to continue)".colorize(:green), keys: [:space, :return])
+PROMPT.keypress("(Press space or enter to continue)".colorize(:green), keys: [:space, :return])
 
+while user.logged_in
     system("clear")
     
     movie_items = MovieItems.new(user.search_movie)
@@ -41,11 +42,14 @@ while user.logged_in
         movie_items.add_items
         
         movie_items.display_items
+        movie_items.select_movie
     else
         puts "Not a valid string"
+        break
     end
+    
 
-    sleep 30
+
 end
 
 # Next section is user to select which movie they want to pull info for

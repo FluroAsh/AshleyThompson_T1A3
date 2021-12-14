@@ -20,7 +20,11 @@ require 'openssl'
 # Config for Whirly
 Whirly.configure spinner: "shark", interval: 60
 
+# Config for Terminal Table
+# Terminal::Table::Style.defaults = {:width => 80}
+
 # Prompt instance & Dot constant
 PROMPT = TTY::Prompt.new(active_color: :magenta)
 DOT = PROMPT.decorate(PROMPT.symbols[:dot] + "", :yellow)
-# TABLE = Terminal::Table.new :rows => ROWS
+
+

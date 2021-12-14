@@ -1,7 +1,7 @@
 require_relative './lib/environment'
 
 class MovieItems
-    attr_reader :search_title, :movie_items
+    attr_reader :search_title, :movie_items, :choices
 
     def initialize(search_title)
         @search_title = search_title
@@ -9,13 +9,6 @@ class MovieItems
         @choices = []
         @selected_movie = nil
     end
-
-    # API Methods will go in here
-    # - fetch_items (from API) ✅
-    # - parse_JSON
-    # - add_items
-    # - display_items
-    # - select_movie
 
     def fetch_items # what if there's no results?
         url = URI("https://movie-database-imdb-alternative.p.rapidapi.com/?s=" + search_title + "&page=1&r=json")
@@ -34,34 +27,29 @@ class MovieItems
         @api_json = JSON.parse(@response.read_body)
     end
 
-    def add_items
-        # Appends whole hash minus "Search" to movie_items for later use
-        @api_json["Search"].each do |e|
-            @movie_items << e
+    def add_items 
+        # Appends whole api_json "Search" to movie_items for later use
+        @api_json["Search"].each_with_index do |e, i|
+            @movie_items << e unless @api_json["Search"][i]["Type"] == "series"
         end
 
         # Takes values from @movie_items for use in tty-prompt choices
         @movie_items.each_with_index do |e, i|
-            @choices << [
-                @movie_items[i]["Title"], 
-                @movie_items[i]["Year"]
-            ]
+            @choices << [@movie_items[i]["Title"]]
         end
     end
 
-    def display_items
-        # Iterate through movie items
-
-        @movie_items.each_with_index do |e, i|
-            puts "#{@movie_items[i]["Title"]}, #{@movie_items[i]["Year"]}"
+    def display_items 
+        table = Terminal::Table.new :headings => 
+        ["Title".colorize(:magenta), "Year".colorize(:magenta)] do |t|
+            @movie_items.each_with_index do |e, i|
+                t << [@movie_items[i]["Title"].colorize(:cyan), @movie_items[i]["Year"].colorize(:yellow)]
+            end
         end
-        print @choices
+        puts table
+    end
 
-        # print @movie_items[1]
-
-
-        # Get the title & year to print for every element[0..] 
-        # then using terminal table add new row for every new entry  
-        #! Unless too diffuclt, then just focus on logic & skip TT
+    def select_movie #!TODO: Add 'exit' option to the list of choices
+        @selected_movie = PROMPT.select("Select a Movie:", @choices)
     end
 end

@@ -4,6 +4,13 @@ require_relative '../movie'
 require_relative '../favourites'
 system("clear")
 
+## Each test should:
+# - cover a different feature of the application
+# - state what is being tested
+# - provide at least TWO test cases and the expected results for each test case
+
+# > An outline of the testing procedure and cases should be included with the source code of the application
+
 describe 'User' do
     # Before running 'User' tests, read user-details.json
     before(:each) do
@@ -22,10 +29,17 @@ describe 'User' do
     end
 end
 
-# describe 'MovieItems' do
-#     it 'should return a response from the API'
-#         movie_items = MovieItems.new("Batman")
-#         movie_items.fetch_items
-#         expect(movie_items.search_title).to eq()
-#     end
-# end
+describe 'MovieItems' do
+    it 'should return search title' do
+        movie_items = MovieItems.new("Batman")
+        expect(movie_items.search_title).to eq("Batman")
+    end
+
+    it 'should return a resposne from the API' do
+        movie_items = MovieItems.new("Batman")
+        movie_items.fetch_items
+        movie_items.parse_JSON
+        movie_items.add_items
+        expect(movie_items.display_items).to eq(nil)
+    end
+end
