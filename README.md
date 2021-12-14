@@ -11,7 +11,7 @@ The user(s) this application is most appropriate for are movie enthusiasts that 
 The above user will make use of the application by entering a movie title which will concatenated into a link that will search through our API and return a list of **movie-items** that contain relevant information for the user. When they receive this information they will have the option to select one of these movies and append it to a **favourites list**. 
 
 
-# ~List of Features
+# List of Features
 1. User **login** feature
    1. Allows user to enter **Username** + **Password** to retrieve associated relevant *favourite* movies
    2. No actual database implementation, simply stored in the form of JSON document
