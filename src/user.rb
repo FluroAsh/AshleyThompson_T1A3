@@ -108,16 +108,23 @@ class User
         end
     end
 
+    #TODO: Fix bug - Will raise error if there is a space, but any more will pass variable to movie_items
     def search_movie
-        # begin
+        begin 
             system("clear")
             puts "What movie are you looking for?".colorize(:cyan)
             print ">> ".colorize(:cyan)
             @search_title = gets.chomp.gsub(/\s+/, '%20') 
 
-        # rescue StandardError
-        #     puts "Search cannot be empty, try again ❌".colorize(:red)
-        #     retry
-        # end
+            if @search_title.empty?
+                raise StandardError
+            else
+                @search_title
+            end
+        rescue StandardError
+            puts ">> Search cannot be empty — please try again ❌".colorize(:red)
+            sleep 2
+            retry
+        end
     end
 end

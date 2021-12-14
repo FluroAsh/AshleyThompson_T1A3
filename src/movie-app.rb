@@ -5,7 +5,7 @@ while true  # Loops unless our ternary operator returns 'break'
     User.welcome
     login_register = PROMPT.select("", %w(Login Register Exit))
 
-    case login_register
+    case login_register # To do fix so there's a delay before exiting loop
     when "Login"
         system("clear")
         username = User.get_username
@@ -33,7 +33,7 @@ PROMPT.keypress("(Press space or enter to continue)".colorize(:green), keys: [:s
 
 while user.logged_in
     system("clear")
-    
+
     movie_items = MovieItems.new(user.search_movie)
 
     if user.search_title

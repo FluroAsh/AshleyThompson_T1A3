@@ -29,13 +29,15 @@ class MovieItems
 
     def add_items 
         # Appends whole api_json "Search" to movie_items for later use
-        @api_json["Search"].each_with_index do |e, i|
-            @movie_items << e unless @api_json["Search"][i]["Type"] == "series"
-        end
+        begin
+            @api_json["Search"].each_with_index do |e, i|
+                @movie_items << e unless @api_json["Search"][i]["Type"] == "series"
+            end
 
-        # Takes values from @movie_items for use in tty-prompt choices
-        @movie_items.each_with_index do |e, i|
-            @choices << [@movie_items[i]["Title"]]
+            # Takes values from @movie_items for use in tty-prompt choices
+            @movie_items.each_with_index do |e, i|
+                @choices << [@movie_items[i]["Title"]]
+            end
         end
     end
 
