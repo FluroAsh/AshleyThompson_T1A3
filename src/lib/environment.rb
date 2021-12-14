@@ -13,6 +13,9 @@ require_relative '../movie-items'
 
 # Default gems
 require 'json'
+require 'uri'
+require 'net/http'
+require 'openssl'
 
 # Config for Whirly
 Whirly.configure spinner: "shark", interval: 60
@@ -20,3 +23,4 @@ Whirly.configure spinner: "shark", interval: 60
 # Prompt instance & Dot constant
 PROMPT = TTY::Prompt.new(active_color: :magenta)
 DOT = PROMPT.decorate(PROMPT.symbols[:dot] + "", :yellow)
+# TABLE = Terminal::Table.new :rows => ROWS

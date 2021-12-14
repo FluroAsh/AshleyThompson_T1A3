@@ -1,13 +1,13 @@
 require_relative './lib/environment'
 
 class User
-    attr_reader :username, :logged_in
+    attr_reader :username, :logged_in, :search_title
 
     def initialize(username, password)
         @username = username
         @password = password
         @file_path = "./lib/user-details.json"
-        # @search_title = search_title
+        @search_title = nil
         @logged_in = false
     end
 
@@ -96,6 +96,7 @@ class User
                 File.open(@file_path, "w") do |f|
                     f.puts JSON.pretty_generate(temp_json)
                 end
+                @logged_in = true
             else
                 raise StandardError   
             end
@@ -108,11 +109,15 @@ class User
     end
 
     def search_movie
-        # Get title from user
-        # Initialize into movie-items
+        # begin
+            system("clear")
+            puts "What movie are you looking for?".colorize(:cyan)
+            print ">> ".colorize(:cyan)
+            @search_title = gets.chomp.gsub(/\s+/, '%20') 
 
-        # puts "What movie are you looking for?"
-        # print ">> "
-        # movie = gets.chomp.gsub(/\s+/, '%20')
+        # rescue StandardError
+        #     puts "Search cannot be empty, try again ❌".colorize(:red)
+        #     retry
+        # end
     end
 end

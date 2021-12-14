@@ -3,6 +3,10 @@ GEM
   specs:
     colorize (0.8.1)
     diff-lcs (1.4.4)
+    ipaddr (1.2.3)
+    openssl (2.2.1)
+      ipaddr
+    paint (2.2.1)
     pastel (0.8.0)
       tty-color (~> 0.5)
     rspec (3.10.0)
@@ -31,6 +35,9 @@ GEM
       wisper (~> 2.0)
     tty-screen (0.8.1)
     unicode-display_width (2.1.0)
+    uri (0.11.0)
+    whirly (0.3.0)
+      unicode-display_width (>= 1.1)
     wisper (2.0.1)
 
 PLATFORMS
@@ -38,9 +45,13 @@ PLATFORMS
 
 DEPENDENCIES
   colorize (~> 0.8.1)
+  openssl (~> 2.2)
+  paint (~> 2.2)
   rspec (~> 3.10)
   terminal-table (~> 3.0)
   tty-prompt (~> 0.23.1)
+  uri (~> 0.11.0)
+  whirly (~> 0.3.0)
 
 BUNDLED WITH
    2.2.33
