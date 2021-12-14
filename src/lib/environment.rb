@@ -15,7 +15,7 @@ require_relative '../movie-items'
 require 'json'
 
 # Config for Whirly
-Whirly.configure spinner: "dots12"
+Whirly.configure spinner: "shark", interval: 60
 
 # Prompt instance & Dot constant
 PROMPT = TTY::Prompt.new(active_color: :magenta)

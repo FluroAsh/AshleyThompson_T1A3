@@ -3,13 +3,12 @@ require_relative './lib/environment'
 class User
     attr_reader :username, :logged_in
 
-    
     def initialize(username, password)
         @username = username
         @password = password
         @file_path = "./lib/user-details.json"
         # @search_title = search_title
-        @logged_in = nil
+        @logged_in = false
     end
 
     def self.welcome
@@ -55,24 +54,43 @@ class User
     def validate_login 
         user_data = File.read(@file_path)
         temp_json = JSON.parse(user_data)
-        
+
         @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username} ? true : false
         @password_check = temp_json["user_data"].find { |h1| h1["password"] == @password} ? true : false
         
-        
         @logged_in = @username_check && @password_check
+
+        begin 
+            if @logged_in
+                Whirly.start stop: ">> Login Success ✅".colorize(:green) do
+                    sleep 2
+                    puts "-----------------------------------------"
+                end
+            else
+                raise StandardError 
+            end
+        rescue StandardError
+            Whirly.start stop: ">> \"#{username.underline}\" login failed — please try again ❌".colorize(:red) do
+                sleep 2
+                puts "-----------------------------------------"
+            end
+        end
     end
 
     def save_login
+        user_data = File.read(@file_path)
+        temp_json = JSON.parse(user_data)
+
         begin
+            @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username} ? true : false
+
             if @username_check == false
-                puts ">> No match, creating new login ✅".colorize(:green)
+                Whirly.start stop: ">> No match, creating new login ✅".colorize(:green) do
+                sleep 2
                 puts "-----------------------------------------"
+                end
                 
                 new_user = {username: @username, password: @password}
-            
-                user_data = File.read(@file_path)
-                temp_json = JSON.parse(user_data)
                 temp_json["user_data"] << new_user
 
                 File.open(@file_path, "w") do |f|
@@ -80,6 +98,11 @@ class User
                 end
             else
                 raise StandardError   
+            end
+        rescue StandardError
+            Whirly.start stop: ">> Username \"#{username.underline}\" already in use — please try again ❌".colorize(:red) do
+            sleep 2
+            puts "-----------------------------------------"
             end
         end
     end
@@ -92,5 +115,4 @@ class User
         # print ">> "
         # movie = gets.chomp.gsub(/\s+/, '%20')
     end
-
 end

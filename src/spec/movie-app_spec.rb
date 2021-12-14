@@ -14,7 +14,7 @@ describe 'User' do
 
     it 'should return username' do
     user = User.new("Test", "foobar123")
-        expect(user.get_username).to eq("Test")
+        expect(user.username).to eq("Test")
     end
 
     it 'should return true as username "Test" match is found' do

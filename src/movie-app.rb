@@ -1,51 +1,35 @@
 require_relative './lib/environment'
-system("clear")
 
-User.welcome
-
-login_register = PROMPT.select("", %w(Login Register Exit))
-
-case login_register
-when "Login"
+while true # Loops menu until 'exit' condition is found
     system("clear")
-        begin
+    User.welcome
+    login_register = PROMPT.select("", %w(Login Register Exit))
+
+    case login_register
+    when "Login"
+        system("clear")
+        username = User.get_username
+        password = User.get_password
+
+        user = User.new(username, password)
+        
+        user.validate_login
+            
+    when "Register"
+        system("clear")
             username = User.get_username
             password = User.get_password
         
             user = User.new(username, password)
-            user.validate_login
-            
-            if user.logged_in
-                Whirly.start stop: ">> Login Success ✅".colorize(:green) do
-                    sleep 2
-                    puts "-----------------------------------------"
-                end
-            else
-                raise StandardError 
-            end
-        rescue StandardError
-            puts ">> \"#{username.underline}\" login failed — please try again ❌".colorize(:red)
-            puts "-----------------------------------------"
-            retry
-        end
-        
-when "Register"
-    system("clear")
-    begin
-        username = User.get_username
-        password = User.get_password
-    
-        user = User.new(username, password)
-        user.validate_login
-        user.save_login
-    rescue StandardError
-        puts ">> Username \"#{username.underline}\" already in use — please try again ❌".colorize(:red)
-        puts "-----------------------------------------"
-        retry
+            user.save_login
+
+    when "Exit"
+        exit 
     end
 
-when "Exit"
-    exit
+    PROMPT.keypress("(Press space or enter to continue)".colorize(:green), keys: [:space, :return])
+
+    # user.search_movie
+    # Get input from user, return and build upon movie-items/movie class
 end
 
-PROMPT.keypress("(Press space or enter to continue)".colorize(:green), keys: [:space, :return])
