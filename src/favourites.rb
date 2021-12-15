@@ -1,12 +1,25 @@
 class Favourites
-    def initialize()
+    def initialize(username, title, year)
+        @username = username
+        @file_path = "./lib/favourites.json"
+        @title = title
+        @year = year
         
     end
 
     # reading and writing to favourites.txt will happen here
 
-    def favourite_movie; end
-    # Save movie.title & movie.year into favourites.JSON
+    def parse_JSON
 
-    def display_favourites; end
+    end
+
+    def save_favourite 
+        # Save movie.title & movie.year into favourites.JSON
+        puts "::: You're in save_favourite"
+    end
+
+
+    def display_favourites
+        puts "::: You're in display_favourites"
+    end
 end

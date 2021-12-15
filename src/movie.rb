@@ -55,7 +55,7 @@ class Movie
             puts "Plot".underline
             puts @api_json["Plot"]
         
-        unless @api_json["Ratings"].empty? || @api_json["Ratings"].length < 3
+        unless @api_json["Ratings"].empty? || @api_json["Ratings"].size < 3
             # Ratings Table
             puts ""
             puts "Ratings".underline
@@ -77,20 +77,11 @@ class Movie
                         ratings[2][1].colorize(:yellow) 
                     ]
                 end
-
                 puts table2
         end
-
             # Save these for use in favourites
             @title = @api_json["Title"]
             @year = @api_json["Year"]
-        
-        #     raise StandardError if @api_json["Response"] == "False"
-        # rescue StandardError
-        #     puts "Error occured, no response from API".colorize(:red)
-        #     sleep 2
-        #     exit
-        # end
 
     end
 end

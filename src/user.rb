@@ -1,7 +1,8 @@
 require_relative './lib/environment'
 
 class User
-    attr_reader :username, :logged_in, :search_title
+    attr_reader :username, :search_title
+    attr_accessor :logged_in
 
     def initialize(username, password)
         @username = username
@@ -11,31 +12,18 @@ class User
         @logged_in = false
     end
 
-    def self.welcome # TODO: Add welcome message
+    def self.welcome
         puts "
-            iWWMMMMBt+++VBMBRBVBXXXBBBMMMMMMBMMMM
-            iWMRRXRRI+IVBXXBBBBBBRBXXRBMBMRXXXBBBMMMM
-        VWMRYiYVXtIRBBBBMMMMMMMMMMMMWWMMMBXYtIYXMBB
-        =RWWWBI  =BRXXRRRBBMMMMMMMWMMMMMMMMBBBRVVXRXRV
-        tWWMWWWY ;WBXVXXRRBBMMMMMMWWWMMWWWWMMMBRRXXXVVI
-    +WWWMMWWX;VBVIVVXRRRMMMWWWWWWWMMWWWWMMMBRRBRRRVi
-    MWWWWBRMBYXVVXI+;;+iIXBWWWWWWWWWWWWWWMMBBBRBBBBMI
-    XWWWWMVRXVt;t+=IXBRRYi=iVMWWWWWWMXVYIYVYVBBBBBBRBMBI
-    ,MWMWBYXXRBR=.=tYVBMMWMV=+RMWWWWBXVIVRRRRViIBBRBXYMWWV
-    MWRRItRBMMMM::+,+ttIVVMM;iBMWWMRRMMWWMBRRRYiVVtVVRBMY
-    MWXtX=tMMMMMIt,.:=tYBMRBBIBWWMMMVIItXBMXVVI+tIiI:YRXMB
-    WMBIiR+YtBBMXRBMMMMMMMBRYRMWMMMMWWXti,.;tItIIYYiRRBBMMV
-    ,MWMMtIRR=,+XBBMMMMMMMMWR:;RWWBRMMWWWMBRXYXBBXYYV+VMWMBMMM
-    VWMMi::BW,  IIRMMMMWWWWX+..,I+:iMMWWWWWWMMMBBRXVXYRMMWMBMMX
-    +WMMY::,BX   :RMBMMMWWMMRYVVXMWBXVMWWWWWWWMMBRXXXXYIRMBMMBBMR
-    =WMBBi:tt    tBBRBBMMMMRYtitYYVXMWWWWWMWWMMBXXVYXVi:VMMMMMMWV
-    RWRV+,;,,   XBRRRBBBt,..:+t=+:..+RWWWWWMBBXVVVXXIiI:IVMMBMMMW
-    IMRBRRBMB=  YXRRRBBBB,..+YBBBBV...=MWWMBBRRVVXXBYXRRBXBMMBMMMB
-    tMYitIXMi    iYXXRXRBRt;.:itt=:=iXMWWWMBBRRVXXRRVRMWWMMMMMMBBB
-    :MR:.,:Ii      YVVXRBBBMMRRRBMWMMMMMMMMBBRXXXYY+VMXMWMBMMBBVVRI
-    :RY+            iVRBBBBMMMWWWMMMMMMMBBBBRRXVt.iXYRYXMBBBYItVVt
-    =XVY,            ;tVRBBMMMWWWMMMMBMBBBBXVYt  iXBMWWMRVXYXMMY
-    RX:,              ,,;+tIIVXRBBRXVVIIi=,.=  iYYt+;,;iYRMMXt
+       `8.`888b                 ,8' 8 8888888888   8 8888         ,o888888o.        ,o888888o.           ,8.       ,8.          8 8888888888   
+        `8.`888b               ,8'  8 8888         8 8888        8888     `88.   . 8888     `88.        ,888.     ,888.         8 8888         
+         `8.`888b             ,8'   8 8888         8 8888     ,8 8888       `8. ,8 8888       `8b      .`8888.   .`8888.        8 8888         
+          `8.`888b     .b    ,8'    8 8888         8 8888     88 8888           88 8888        `8b    ,8.`8888. ,8.`8888.       8 8888         
+           `8.`888b    88b  ,8'     8 888888888888 8 8888     88 8888           88 8888         88   ,8'8.`8888,8^8.`8888.      8 888888888888 
+            `8.`888b .`888b,8'      8 8888         8 8888     88 8888           88 8888         88  ,8' `8.`8888' `8.`8888.     8 8888         
+             `8.`888b8.`8888'       8 8888         8 8888     88 8888           88 8888        ,8P ,8'   `8.`88'   `8.`8888.    8 8888         
+              `8.`888`8.`88'        8 8888         8 8888     `8 8888       .8' `8 8888       ,8P ,8'     `8.`'     `8.`8888.   8 8888         
+               `8.`8' `8,`'         8 8888         8 8888        8888     ,88'   ` 8888     ,88' ,8'       `8        `8.`8888.  8 8888         
+                `8.`   `8'          8 888888888888 8 888888888888 `8888888P'        `8888888P'  ,8'         `         `8.`8888. 8 888888888888
     ".colorize(:yellow)
     end
 
@@ -126,5 +114,11 @@ class User
             sleep 2
             retry
         end
+    end
+
+    def logout
+        @logged_in = false
+        @username.clear
+        @password.clear
     end
 end
