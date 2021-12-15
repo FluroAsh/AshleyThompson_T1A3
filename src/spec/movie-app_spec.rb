@@ -43,3 +43,7 @@ describe 'MovieItems' do
         expect(movie_items.display_items).to eq(nil)
     end
 end
+
+# Create 2 tests for movie.rb
+
+# Creates 2 tests for favourites.rb

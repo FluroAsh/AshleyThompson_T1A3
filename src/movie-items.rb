@@ -1,8 +1,8 @@
 require_relative './lib/environment'
 
 class MovieItems
-    attr_reader :search_title, :movie_items, :choices
-
+    attr_reader :search_title, :movie_items, :choices, :selected_movie
+    
     def initialize(search_title)
         @search_title = search_title
         @movie_items = [] # Temp array to hold our search items
@@ -11,6 +11,7 @@ class MovieItems
     end
 
     def fetch_items # what if there's no results?
+        
         url = URI("https://movie-database-imdb-alternative.p.rapidapi.com/?s=" + search_title + "&page=1&r=json")
 
         http = Net::HTTP.new(url.host, url.port)
@@ -23,7 +24,7 @@ class MovieItems
         @response = http.request(request)
     end
 
-    def parse_JSON
+    def parse_JSON  
         @api_json = JSON.parse(@response.read_body)
     end
 
@@ -38,6 +39,7 @@ class MovieItems
             @movie_items.each_with_index do |e, i|
                 @choices << [@movie_items[i]["Title"]]
             end
+            @choices << ["Exit"]
         end
     end
 
@@ -51,7 +53,21 @@ class MovieItems
         puts table
     end
 
-    def select_movie #!TODO: Add 'exit' option to the list of choices
+    def select_movie
         @selected_movie = PROMPT.select("Select a Movie:", @choices)
+        if @selected_movie == "Exit"
+            exit
+        end
+        @selected_movie
+
+    end
+
+    def get_imdbID
+        @movie_items.each_with_index do |e, i|
+            if @selected_movie == @movie_items[i]["Title"]
+                @imdb_ID = @movie_items[i]["imdbID"]
+            end
+        end
+        @imdb_ID.chomp.strip
     end
 end

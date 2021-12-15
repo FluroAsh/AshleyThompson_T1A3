@@ -11,7 +11,7 @@ class User
         @logged_in = false
     end
 
-    def self.welcome
+    def self.welcome # TODO: Add welcome message
         puts "
             iWWMMMMBt+++VBMBRBVBXXXBBBMMMMMMBMMMM
             iWMRRXRRI+IVBXXBBBBBBRBXXRBMBMRXXXBBBMMMM

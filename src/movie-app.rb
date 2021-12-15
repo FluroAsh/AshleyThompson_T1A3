@@ -1,5 +1,7 @@
 require_relative './lib/environment'
 
+## ARGV's go here
+
 while true  # Loops unless our ternary operator returns 'break'
     system("clear")
     User.welcome
@@ -13,7 +15,12 @@ while true  # Loops unless our ternary operator returns 'break'
         user = User.new(username, password)
         
         user.validate_login
-        user.logged_in ? break : next 
+        if user.logged_in
+            break 
+        else
+            sleep 2
+            next
+        end  
             
     when "Register"
         system("clear")
@@ -22,8 +29,13 @@ while true  # Loops unless our ternary operator returns 'break'
         user = User.new(username, password)
         
         user.save_login
-        user.logged_in ? break : next 
-           
+        if user.logged_in
+            break 
+        else
+            sleep 2
+            next
+        end  
+              
     when "Exit"
         exit 
     end
@@ -43,13 +55,24 @@ while user.logged_in
         
         movie_items.display_items
         movie_items.select_movie
+        imdb_id = movie_items.get_imdbID
+        
+        movie = Movie.new(movie_items.selected_movie, imdb_id)
+        movie.fetch_items
+        movie.parse_JSON
+        movie.display_md
+
+        # Check if user wants to save the movie as a favourite
+        # Check if user wants to view favourites
+        
+        # If not search again?
+        # if not exit.
+
+        sleep 50
     else
         puts "Not a valid string"
         break
     end
-    
-
-
 end
 
 # Next section is user to select which movie they want to pull info for
