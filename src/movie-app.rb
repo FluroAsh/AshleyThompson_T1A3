@@ -65,22 +65,15 @@ while user.logged_in
         movie.display_md
         puts "" 
 
-        favourite = PROMPT.select("Favourites".underline) do |menu|
-            menu.choice "Display All"
-            menu.choice "Add"
-            menu.choice "Exit"
-        end
-        #system("clear")
-        
-        case favourite
-        when "Display All" then puts "Displaying favourites..."
-        when "Add to Favourites" then puts "Storing current movie..."
-        when "Exit" then exit
+        display_add = PROMPT.select("Favourites".underline) do |menu|
+            menu.choice "Display", -> { puts "Displaying Favourites..."}
+            menu.choice "Add", -> { puts "Storing current movie..." }
+            menu.choice "Exit", -> { exit } 
         end
 
-        ## Display favourites/Store?
-        # ttyprompt options (display/store/exit)
+        # favourite = Favourites.new(movie.selected_movie)
 
+        ## TODO: Setup below methods in favourites... 
         # if "display" > call display_favourites
         # if "store" > call favourite_movie
         # if "exit" > exit
@@ -91,7 +84,3 @@ while user.logged_in
         break
     end
 end
-
-# Next section is user to select which movie they want to pull info for
-# Will need to get IMDB id to gather specific information
-

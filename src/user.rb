@@ -62,7 +62,7 @@ class User
 
         begin 
             if @logged_in
-                Whirly.start stop: ">> Login Success ✅".colorize(:green) do
+                Whirly.start stop: ">> Login Authenticated ✅".colorize(:green) do
                     sleep 2
                     puts "-----------------------------------------"
                 end

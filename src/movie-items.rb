@@ -10,7 +10,7 @@ class MovieItems
         @selected_movie = nil
     end
 
-    def fetch_items # what if there's no results?
+    def fetch_items # what if there's no results? "Response" => "False"?
         
         url = URI("https://movie-database-imdb-alternative.p.rapidapi.com/?s=" + search_title + "&page=1&r=json")
 
@@ -30,17 +30,15 @@ class MovieItems
 
     def add_items 
         # Appends whole api_json "Search" to movie_items for later use
-        begin
-            @api_json["Search"].each_with_index do |e, i|
-                @movie_items << e unless @api_json["Search"][i]["Type"] == "series"
-            end
-
-            # Takes values from @movie_items for use in tty-prompt choices
-            @movie_items.each_with_index do |e, i|
-                @choices << [@movie_items[i]["Title"]]
-            end
-            @choices << ["Exit"]
+        @api_json["Search"].each_with_index do |e, i|
+            @movie_items << e unless @api_json["Search"][i]["Type"] == "series" || @api_json["Search"][i]["Type"] == "game"
         end
+
+        # Takes values from @movie_items for use in tty-prompt choices
+        @movie_items.each_with_index do |e, i|
+            @choices << [@movie_items[i]["Title"]]
+        end
+        @choices << ["Exit"]
     end
 
     def display_items 
@@ -68,6 +66,6 @@ class MovieItems
                 @imdb_ID = @movie_items[i]["imdbID"]
             end
         end
-        @imdb_ID.chomp.strip
+        @imdb_ID
     end
 end

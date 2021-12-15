@@ -1,15 +1,10 @@
 class Movie
-    attr_reader :selected_movie, :movie_info
+    attr_reader :selected_movie, :movie_info, :title, :year
 
     def initialize(selected_movie, imdb_id)
         @selected_movie = selected_movie
-        @movie_info = []
         @imdb_id = imdb_id
     end
-
-    # Movie selection and display methods will go here
-
-    # Requires the IMDB ID to get additional information such as actors, writers, release date etc.
     
     def fetch_items # what if there's no results?
         url = URI("https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + @imdb_id + "&r=json")
@@ -26,6 +21,7 @@ class Movie
 
     def parse_JSON
         @api_json = JSON.parse(@response.read_body)
+        # @api_json.sort_by { |key| @api_json["Year"] } unless 
     end
 
     def display_md
@@ -41,8 +37,7 @@ class Movie
             "Runtime".colorize(:magenta),
             "Director".colorize(:magenta),
             "Genre".colorize(:magenta),
-            "Actors".colorize(:magenta),
-            "Awards".colorize(:magenta)
+            "Actors".colorize(:magenta)
             ] do |t|
                 t << [
                     @api_json["Title"].colorize(:cyan), 
@@ -52,8 +47,7 @@ class Movie
                     @api_json["Runtime"].colorize(:yellow),
                     @api_json["Director"].colorize(:yellow),
                     @api_json["Genre"].colorize(:yellow),
-                    @api_json["Actors"].colorize(:yellow),
-                    @api_json["Awards"].colorize(:yellow)
+                    @api_json["Actors"].colorize(:yellow)
                 ]
             end
             puts table
@@ -61,29 +55,35 @@ class Movie
             puts "Plot".underline
             puts @api_json["Plot"]
         
-        # Ratings Table
-        puts ""
-        puts "Ratings".underline
+        unless @api_json["Ratings"].empty? || @api_json["Ratings"].length < 3
+            # Ratings Table
+            puts ""
+            puts "Ratings".underline
 
-        ratings = []
-        @api_json["Ratings"].each_with_index { |e| ratings << e.values}
+            ratings = []
+            @api_json["Ratings"].each_with_index { |e| ratings << e.values}
 
-        table2 = Terminal::Table.new :headings => 
-        [
-            "IMDB Rating".colorize(:magenta),
-            "Rotten Tomatoes".colorize(:magenta),
-            "Metascore".colorize(:magenta),
-            "Metacritic".colorize(:magenta)    
-            ] do |t|
-                t << [ 
-                    @api_json["imdbRating"].colorize(:yellow),
-                    ratings[1][1].colorize(:yellow), 
-                    @api_json["Metascore"].colorize(:yellow), 
-                    ratings[2][1].colorize(:yellow) 
-                ]
-            end
+            table2 = Terminal::Table.new :headings => 
+            [
+                "IMDB Rating".colorize(:magenta),
+                "Rotten Tomatoes".colorize(:magenta),
+                "Metascore".colorize(:magenta),
+                "Metacritic".colorize(:magenta)    
+                ] do |t|
+                    t << [ 
+                        @api_json["imdbRating"].colorize(:yellow),
+                        ratings[1][1].colorize(:yellow), 
+                        @api_json["Metascore"].colorize(:yellow), 
+                        ratings[2][1].colorize(:yellow) 
+                    ]
+                end
 
-            puts table2
+                puts table2
+        end
+
+            # Save these for use in favourites
+            @title = @api_json["Title"]
+            @year = @api_json["Year"]
         
         #     raise StandardError if @api_json["Response"] == "False"
         # rescue StandardError
@@ -93,6 +93,4 @@ class Movie
         # end
 
     end
-
-    def favourite_movie; end
 end
