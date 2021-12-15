@@ -10,7 +10,8 @@ class Favourites
     # reading and writing to favourites.txt will happen here
 
     def parse_JSON
-
+        # Parse existing JSON so we can use it 
+        # in our save_favourite & display_favourites methods
     end
 
     def save_favourite 

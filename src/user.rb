@@ -1,8 +1,7 @@
 require_relative './lib/environment'
 
 class User
-    attr_reader :username, :search_title
-    attr_accessor :logged_in
+    attr_reader :username, :search_title, :logged_in
 
     def initialize(username, password)
         @username = username
@@ -118,6 +117,7 @@ class User
 
     def logout
         @logged_in = false
+        @search_title.clear
         @username.clear
         @password.clear
     end
