@@ -1,4 +1,6 @@
 class Movie
+    attr_reader :selected_movie, :movie_info
+
     def initialize(selected_movie, imdb_id)
         @selected_movie = selected_movie
         @movie_info = []
@@ -74,7 +76,7 @@ class Movie
             "Metacritic".colorize(:magenta)    
             ] do |t|
                 t << [ 
-                    @api_json["imdbRating"].colorize(:green),
+                    @api_json["imdbRating"].colorize(:yellow),
                     ratings[1][1].colorize(:yellow), 
                     @api_json["Metascore"].colorize(:yellow), 
                     ratings[2][1].colorize(:yellow) 

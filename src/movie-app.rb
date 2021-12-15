@@ -2,6 +2,7 @@ require_relative './lib/environment'
 
 ## ARGV's go here
 
+# Main Menu
 while true  # Loops unless our ternary operator returns 'break'
     system("clear")
     User.welcome
@@ -43,6 +44,7 @@ end
 
 PROMPT.keypress("(Press space or enter to continue)".colorize(:green), keys: [:space, :return])
 
+# Search Menu(s)
 while user.logged_in
     system("clear")
 
@@ -61,12 +63,27 @@ while user.logged_in
         movie.fetch_items
         movie.parse_JSON
         movie.display_md
+        puts "" 
 
-        # Check if user wants to save the movie as a favourite
-        # Check if user wants to view favourites
+        favourite = PROMPT.select("Favourites".underline) do |menu|
+            menu.choice "Display All"
+            menu.choice "Add"
+            menu.choice "Exit"
+        end
+        #system("clear")
         
-        # If not search again?
-        # if not exit.
+        case favourite
+        when "Display All" then puts "Displaying favourites..."
+        when "Add to Favourites" then puts "Storing current movie..."
+        when "Exit" then exit
+        end
+
+        ## Display favourites/Store?
+        # ttyprompt options (display/store/exit)
+
+        # if "display" > call display_favourites
+        # if "store" > call favourite_movie
+        # if "exit" > exit
 
         sleep 50
     else

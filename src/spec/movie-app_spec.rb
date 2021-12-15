@@ -45,5 +45,20 @@ describe 'MovieItems' do
 end
 
 # Create 2 tests for movie.rb
+## 1. Successfully parses the called JSON
+    # pass imdb id to fetch items
+    # parse the file
+    # check to see if the response is not nil
+
+## 2. Displays an output to our terminal
+    # pass imdb_id to fetch_items
+    # parse it
+    # display_md
+    # expect the output to eq nil
+
+
 
 # Creates 2 tests for favourites.rb
+## 1. Stores a favourite movie
+
+## 2. Retrieves favourites
