@@ -95,13 +95,12 @@ class User
         end
     end
 
-    #TODO: Fix bug - Will raise error if there is a space, but any more will pass variable to movie_items
     def search_movie
         begin 
             system("clear")
             puts "What movie are you looking for?".colorize(:cyan)
             print ">> ".colorize(:cyan)
-            @search_title = gets.chomp.gsub(/\s+/, '%20') 
+            @search_title = gets.chomp.strip.gsub(/\s+/, '%20') 
 
             if @search_title.empty?
                 raise StandardError

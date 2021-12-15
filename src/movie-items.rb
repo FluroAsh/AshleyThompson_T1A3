@@ -11,7 +11,6 @@ class MovieItems
     end
 
     def fetch_items # what if there's no results? "Response" => "False"?
-        
         url = URI("https://movie-database-imdb-alternative.p.rapidapi.com/?s=" + search_title + "&page=1&r=json")
 
         http = Net::HTTP.new(url.host, url.port)
@@ -30,15 +29,21 @@ class MovieItems
 
     def add_items 
         # Appends whole api_json "Search" to movie_items for later use
-        @api_json["Search"].each_with_index do |e, i|
-            @movie_items << e unless @api_json["Search"][i]["Type"] == "series" || @api_json["Search"][i]["Type"] == "game"
-        end
+        if @api_json["Response"] == "True"
+            @api_json["Search"].each_with_index do |e, i|
+                @movie_items << e unless @api_json["Search"][i]["Type"] == "series" || @api_json["Search"][i]["Type"] == "game"
+            end
 
-        # Takes values from @movie_items for use in tty-prompt choices
-        @movie_items.each_with_index do |e, i|
-            @choices << [@movie_items[i]["Title"]]
+            # Takes values from @movie_items for use in tty-prompt choices
+            @movie_items.each_with_index do |e, i|
+                @choices << [@movie_items[i]["Title"]]
+            end
+            @choices << ["Exit"]
+        else
+            puts ">> Invalid search: no response from API — please try again ❌".colorize(:red)
+            sleep 2
+            "False"
         end
-        @choices << ["Exit"]
     end
 
     def display_items 
@@ -57,7 +62,6 @@ class MovieItems
             exit
         end
         @selected_movie
-
     end
 
     def get_imdbID
