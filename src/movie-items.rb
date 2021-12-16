@@ -10,7 +10,7 @@ class MovieItems
         @selected_movie = nil
     end
 
-    def fetch_items # what if there's no results? "Response" => "False"?
+    def fetch_items
         url = URI("https://movie-database-imdb-alternative.p.rapidapi.com/?s=" + search_title + "&page=1&r=json")
 
         http = Net::HTTP.new(url.host, url.port)

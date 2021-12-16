@@ -1,4 +1,6 @@
-# Statement of Purpose & Scope mag
+# Statement of Purpose & Scope
+## BTW...
+In order to use this application, use the username: **Admin** and password: **foobar123** (or any listed in the .user-details.JSON file, as they all work, albeit with different favourites). 
 ## High level Description
 At a high level this application will contain a variety of features that predominately serve to navigate a movie API and present this information in an easy to digest way, with various manipulation applied to the data in accordance with the **user**'s search query (which will be provided in the context of movie *title*).
 ## The Problem & Why It's Being Developed
@@ -55,10 +57,9 @@ This control flow diagram serves to express what the application intends to do, 
    
    *Implementation*
    - [x] Login/Create/Exit
-   - [ ] Save prompts for confirming writing data to file
-   - [ ] Loop back to appropriate menu when input error raised
-   - [ ] Select `Display/Store` favourite movie
-   - [ ] Search again prompt
+   - [x] Loop back to appropriate menu when input error raised
+   - [x] Select `Display/Store` favourite movie
+   - [x] Search again prompt
 
    *Deadline*
    - December 15th, 2021
@@ -80,11 +81,11 @@ This control flow diagram serves to express what the application intends to do, 
 3. Movie Database Search
 
    *Implementation*
-   - [ ] Successful request to API
-   - [ ] Search User input via API
-   - [ ] Return JSON data
-   - [ ] Parse JSON data
-   - [ ] Initialize variables into menu_items
+   - [x] Successful request to API
+   - [x] Search User input via API
+   - [x] Return JSON data
+   - [x] Parse JSON data
+   - [x] Initialize variables into menu_items
 
    *Deadline*
    - December 16th, 2021
@@ -92,11 +93,11 @@ This control flow diagram serves to express what the application intends to do, 
 4. Archive Favourite Movie(s)
   
    *Implementation*
-   - [ ] Execute method based on whether user chooses to **display/store** favourites
-   - [ ] Store correct Username, Title & Year in `favourites.txt`
-   - [ ] Retrieve Username, Title & Year from `favourites.txt`
-   - [ ] Display list of favourites
-   - [ ] Prompt user to create new search
+   - [x] Execute method based on whether user chooses to **display/store** favourites
+   - [x] Store correct Username, Title & Year in `favourites.txt`
+   - [x] Retrieve Username, Title & Year from `favourites.txt`
+   - [x] Display list of favourites
+   - [x] Prompt user to create new search
 
    *Deadline*
     - 17th December, 2021
@@ -118,6 +119,8 @@ or alternatively execute the run bash script which will automate this for you:
     $ ./run.sh
 
 To execute either of these commands your current directory must be `src`.
+
+In order to login to the application you can use the username: `Admin` and password: `foobar123`. Happy movie hunting! 🥳
 ## Dependencies 
     $ ./install-dependencies
 This will install the required gems for the application to run without errors.

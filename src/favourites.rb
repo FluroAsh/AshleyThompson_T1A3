@@ -69,4 +69,6 @@ class Favourites
             puts ">> No usernames found! ❌ — Try adding a favourite movie first! 😄".colorize(:red)
         end
     end
+
+    # Add method to clear favourites for a specific user if you have time!
 end
