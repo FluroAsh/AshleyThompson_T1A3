@@ -3,7 +3,7 @@ require_relative './lib/environment'
 ## ARGV's go here
 
 # Main Menu
-while true  # Loops until user tells the application to 'exit'
+while true  # Loops until user selects an exit menu.choice
     system("clear")
     User.welcome
     login_register = PROMPT.select("Menu".underline, %w(Login Register Exit))
@@ -40,7 +40,9 @@ while true  # Loops until user tells the application to 'exit'
             movie_items.fetch_items
             movie_items.parse_JSON
 
-            if movie_items.add_items == "False"
+            # Method returns "False" if nothing was added, 
+            # Uses 'Next' to loop back into itself while user.logged_in == true
+            if movie_items.add_items == "False" 
                 next
             end
             
@@ -54,6 +56,7 @@ while true  # Loops until user tells the application to 'exit'
             movie.display_md
 
             favourite = Favourites.new(user.username, movie.title, movie.year)
+            favourite.parse_JSON
             
             puts ""
             PROMPT.select("Favourites".underline) do |menu|
@@ -63,9 +66,6 @@ while true  # Loops until user tells the application to 'exit'
             end
         end 
         
-        
-        # TODO: Don't execute this loop if we're retrying a search
-        # ()
         puts "" 
             PROMPT.select("Search again?".underline) do |menu|
             menu.choice "Yes"

@@ -42,8 +42,8 @@ class User
         user_data = File.read(@file_path)
         temp_json = JSON.parse(user_data)
 
-        @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username} ? true : false
-        @password_check = temp_json["user_data"].find { |h1| h1["password"] == @password} ? true : false
+        @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username } ? true : false
+        @password_check = temp_json["user_data"].find { |h1| h1["password"] == @password } ? true : false
         
         @logged_in = @username_check && @password_check
 
@@ -69,7 +69,7 @@ class User
         temp_json = JSON.parse(user_data)
 
         begin
-            @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username} ? true : false
+            @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username } ? true : false
 
             if @username_check == false
                 Whirly.start stop: ">> No match, creating new login ✅".colorize(:green) do
