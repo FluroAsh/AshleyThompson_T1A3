@@ -26,5 +26,3 @@ Whirly.configure spinner: "shark", interval: 60
 # Prompt instance & Dot constant
 PROMPT = TTY::Prompt.new(active_color: :magenta)
 DOT = PROMPT.decorate(PROMPT.symbols[:dot] + "", :yellow)
-
-

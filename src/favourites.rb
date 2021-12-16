@@ -14,7 +14,7 @@ class Favourites
     end
 
     def save_favourite #TODO: Prevent duplicates of "title" when adding to "user"
-        @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false # 
+        @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false  
 
         if @username_check # && @title_check == false
             @temp_json["favourites"].each_with_index do |hash, i|

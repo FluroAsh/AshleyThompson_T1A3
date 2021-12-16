@@ -82,7 +82,5 @@ class Movie
             # Save these for use in favourites
             @title = @api_json["Title"]
             @year = @api_json["Year"]
-            
-
     end
 end

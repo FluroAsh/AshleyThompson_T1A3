@@ -60,5 +60,7 @@ end
 
 # Creates 2 tests for favourites.rb
 ## 1. Stores a favourite movie
+    # checks to see if there is an entry at index 0
 
 ## 2. Retrieves favourites
+    # should run without error (return nil)

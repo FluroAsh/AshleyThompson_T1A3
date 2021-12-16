@@ -68,29 +68,25 @@ class User
         user_data = File.read(@file_path)
         temp_json = JSON.parse(user_data)
 
-        begin
-            @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username } ? true : false
+        @username_check = temp_json["user_data"].find { |h1| h1["username"] == @username } ? true : false
 
-            if @username_check == false
-                Whirly.start stop: ">> No match, creating new login ✅".colorize(:green) do
-                sleep 2
-                puts "-----------------------------------------"
-                end
-                
-                new_user = {username: @username, password: @password}
-                temp_json["user_data"] << new_user
-
-                File.open(@file_path, "w") do |f|
-                    f.puts JSON.pretty_generate(temp_json)
-                end
-                @logged_in = true
-            else
-                raise StandardError   
-            end
-        rescue StandardError
-            Whirly.start stop: ">> Username \"#{username.underline}\" already in use — please try again ❌".colorize(:red) do
+        if @username_check == false
+            Whirly.start stop: ">> No match, creating new login ✅".colorize(:green) do
             sleep 2
             puts "-----------------------------------------"
+            end
+            
+            new_user = {username: @username, password: @password}
+            temp_json["user_data"] << new_user
+
+            File.open(@file_path, "w") do |f|
+                f.puts JSON.pretty_generate(temp_json)
+            end
+            @logged_in = true
+        else
+            Whirly.start stop: ">> Username \"#{username.underline}\" already in use — please try again ❌".colorize(:red) do
+                sleep 2
+                puts "-----------------------------------------"
             end
         end
     end
