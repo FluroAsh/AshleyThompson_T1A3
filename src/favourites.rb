@@ -1,6 +1,8 @@
 require_relative './lib/environment'
 
 class Favourites
+    attr_reader :favourites_arr
+    
     def initialize(username, title, year)
         @username = username
         @file_path = "./lib/favourites.json"
@@ -71,7 +73,7 @@ class Favourites
     end
 
     def clear
-        PROMPT.select("Are you sure?".underline) do |menu|
+        PROMPT.select("This will remove all favourites from: " + "\"#{@username}\" ".colorize(:cyan) + "Are you sure?".underline) do |menu|
             menu.choice "Yes"
             menu.choice "No", -> { exit }
         end

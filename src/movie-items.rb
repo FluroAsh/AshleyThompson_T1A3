@@ -5,7 +5,7 @@ class MovieItems
     attr_accessor :selected_movie
     
     def initialize
-        @movie_items = [] # Temp array to hold our search items
+        @movie_items = []
         @choices = []
         @selected_movie = nil
     end

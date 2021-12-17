@@ -47,20 +47,18 @@ class User
         
         @logged_in = @username_check && @password_check
 
-        begin 
-            if @logged_in
-                Whirly.start stop: ">> Login Authenticated ✅".colorize(:green) do
-                    sleep 2
-                    puts "-----------------------------------------"
-                end
-            else
-                raise StandardError 
-            end
-        rescue StandardError
-            Whirly.start stop: ">> \"#{username.underline}\" login failed — please try again ❌".colorize(:red) do
+        if @logged_in
+            Whirly.start stop: ">> Login Authenticated ✅".colorize(:green) do
                 sleep 2
                 puts "-----------------------------------------"
             end
+        else
+            raise StandardError 
+        end
+    rescue StandardError
+        Whirly.start stop: ">> \"#{username.underline}\" login failed — please try again ❌".colorize(:red) do
+            sleep 2
+            puts "-----------------------------------------"
         end
     end
 

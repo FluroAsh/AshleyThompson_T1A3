@@ -25,25 +25,24 @@ RSpec.configure do |config|
   end
 
 describe 'User' do
-    # Before running 'User' tests, read user-details.json
-    before(:each) do
+    before(:each) do # Before running 'User' tests, read user-details.json
         user_data = File.read("./lib/user-details.json")
         temp_json = JSON.parse(user_data)
     end
 
-    it 'should return username' do
+    it 'should return username "Test"' do
         user = User.new("Test", "foobar123")
         expect(user.username).to eq("Test")
     end
 
-    it 'should return true as username "Test" match is found' do
+    it 'should return true as username "Test" match is a valid login' do
         user = User.new("Test", "foobar123")
         expect(user.validate_login).to eq(true)
     end
 end
 
 describe 'MovieItems' do ## Modified 2 tests, creating 4 new tests (2x2)
-    it 'should return a response from the API' do
+    it 'should return a response from the movie-items API endpoint' do
         movie_items = MovieItems.new
         search_title = "Batman"
         expect(movie_items.fetch_items(search_title).nil?).to be(false)
@@ -60,21 +59,29 @@ describe 'MovieItems' do ## Modified 2 tests, creating 4 new tests (2x2)
 end
 
 # Create 2 tests for movie.rb
-## 1. Successfully parses the called JSON
-    # pass imdb id to fetch items
-    # parse the file
-    # check to see if the response is not nil
+describe 'Movie' do
+    it 'should initialize the Movie attributes from MovieItems' do
+        movie_items = MovieItems.new
+        search_title = "Batman" # Represents tty-prompt user choice
+        movie_items.fetch_items(search_title)
+        movie_items.add_items
+        selected_movie = "Batman Begins" # Represents tty-prompt user choice
+        imdb_id = movie_items.get_imdbID
+        movie = Movie.new(selected_movie, imdb_id)
+        expect(movie.selected_movie).to eq("Batman Begins")
+    end
 
-#     describe 'Movie' do
-#     it 'should parse the called JSON' do
-#         movie = Movie.new("Batman Begins", "tt0372784")
-#         movie.fetch_items
-        
-#     end
+    it 'should return a response from the IMDB API endpoint' do
+        movie = Movie.new("Batman Begins", "tt0372784")
+        expect(movie.fetch_items.nil?).to eq(false)
+    end
 
-#     it 'should initialize movie attributes' do
-#         movie = Movie.new("Batman Begins", "tt0372784")
-#     end
+    it 'should display movie details to the terminal' do
+        movie = Movie.new("Batman Begins", "tt0372784")
+        movie.fetch_items
+        expect(movie.display_md).to eq(nil)
+    end
+end
 
 #     it 'should display movie details' do
 #         movie = Movie.new("Batman Begins", "tt0372784")
@@ -91,8 +98,15 @@ end
     # expect the output to eq nil
 
 describe 'Favourites' do
-    it 'should succesfully read favourites from favourites.json' do
-        # Check to see if there's an entry at index 0
+    it 'should successfuly return first entry for "Ashley" from the favourites_array (derived from favourites.JSON)' do
+        favourite = Favourites.new("Ashley", "Batman Begins", "tt0372784")
+        favourite.parse_JSON
+        favourite.display_favourites # Assigns values from JSON into favourites_arr
+        expect(favourite.favourites_arr[0].nil?).to eq(false)
+    end
+
+    it 'test #2 goes here' do
+
     end
 
 ## 2. Retrieves favourites

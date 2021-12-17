@@ -3,7 +3,7 @@ class Movie
 
     def initialize(selected_movie, imdb_id)
         @selected_movie = selected_movie
-        @title = title
+        @title = nil
         @imdb_id = imdb_id
     end
     

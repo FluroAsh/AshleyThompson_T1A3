@@ -6,6 +6,7 @@ require 'whirly'
 require 'paint'
 
 # Classes
+require_relative '../args'
 require_relative '../user'
 require_relative '../favourites'
 require_relative '../movie'
