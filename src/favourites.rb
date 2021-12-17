@@ -31,8 +31,8 @@ class Favourites
             puts ">> Added movie: \"#{@title}\" to user: \"#{@username}\"! ✅".colorize(:green)
         else
             # Creates new user with title, year
-            puts ">> Did not find: #{@username} favourites database! ❌".colorize(:red)
-            puts ">> Creating a new favourites entry for #{@username}... ✅".colorize(:green)
+            puts ">> Did not find \"#{@username}\" in the favourites database! ❌".colorize(:red)
+            puts ">> Creating a new favourites entry for \"#{@username}\"... ✅".colorize(:green)
 
             puts "..."
             new_favourite = {username: @username, movies: [{title: @title, year: @year}]}
@@ -72,4 +72,24 @@ class Favourites
     end
 
     # Add method to clear favourites for a specific user if you have time!
+    def clear
+        @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false # Detects if user exists in the favourites database
+
+        PROMPT.select("Are you sure?".underline) do |menu|
+            menu.choice "Yes"
+            menu.choice "No", -> { exit }
+        end
+
+        # Need to delete everything @temp_json["favourites"][1]
+        @temp_json["favourites"].each_with_index do |h1, i|
+            if h1["username"] == @username
+                @temp_json["favourites"][i].clear
+                @temp_json["favourites"].delete({})
+            end
+        end
+        
+        File.open(@file_path, "w") do |f|
+            f.puts JSON.pretty_generate(@temp_json)
+            end
+    end
 end

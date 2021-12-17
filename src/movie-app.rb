@@ -63,18 +63,12 @@ while true  # Loops until user selects an exit menu.choice
     case login_register
     when "Login"
         system("clear")
-        username = User.get_username
-        password = User.get_password
-        user = User.new(username, password)
-        
+        user = User.new(User.get_username, User.get_password)
         user.validate_login
             
     when "Register"
         system("clear")
-        username = User.get_username
-        password = User.get_password
-        user = User.new(username, password)
-        
+        user = User.new(User.get_username, User.get_password)
         user.save_login
               
     when "Exit"
@@ -92,7 +86,7 @@ while true  # Loops until user selects an exit menu.choice
         print ">> ".colorize(:cyan)
         search_title = gets.chomp.strip.gsub(/\s+/, '%20') 
         
-        unless search_title.size < 3 || search_title.start_with?("%20")
+        unless search_title.size < 2 || search_title.start_with?("%20")
             movie_items.fetch_items(search_title)
 
             # Method returns "False" if nothing was added, 
@@ -115,8 +109,9 @@ while true  # Loops until user selects an exit menu.choice
             
             puts ""
             PROMPT.select("Favourites".underline) do |menu|
-                menu.choice "Display", -> { favourite.display_favourites }
-                menu.choice "Add", -> { favourite.save_favourite }
+                menu.choice "Add Current", -> { favourite.save_favourite }
+                menu.choice "Clear All", -> { favourite.clear }
+                menu.choice "Display All", -> { favourite.display_favourites }
                 menu.choice "Exit", -> { exit } 
             end
         end 
@@ -124,10 +119,8 @@ while true  # Loops until user selects an exit menu.choice
         puts "" 
             PROMPT.select("Search again?".underline) do |menu|
             menu.choice "Yes"
-            menu.choice "Exit", -> { exit } 
             menu.choice "Logout", -> { user.logout } 
+            menu.choice "Exit", -> { exit } 
         end 
     end
 end
-
-
