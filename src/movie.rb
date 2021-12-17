@@ -51,7 +51,7 @@ class Movie
             puts "Plot".underline
             puts api_json["Plot"]
         
-        unless api_json["Ratings"].empty? || api_json["Ratings"].size < 3
+        unless api_json["Ratings"].empty? || api_json["Ratings"].size < 2
             # Ratings Table
             puts ""
             puts "Ratings".underline

@@ -1,7 +1,8 @@
 require_relative './lib/environment'
 
 class MovieItems
-    attr_reader :search_title, :movie_items, :choices, :selected_movie
+    attr_reader :movie_items, :choices
+    attr_accessor :selected_movie
     
     def initialize
         @movie_items = [] # Temp array to hold our search items

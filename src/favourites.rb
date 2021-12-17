@@ -28,7 +28,7 @@ class Favourites
                     end
                 end
             end
-            puts ">> Added movie: \"#{@title}\" to user: \"#{@username}\"! ✅".colorize(:green)
+            puts ">> Added movie: ".colorize(:green) + "\"#{@title}\"".colorize(:cyan) + " to user: \"#{@username}\"! ✅".colorize(:green)
         else
             # Creates new user with title, year
             puts ">> Did not find \"#{@username}\" in the favourites database! ❌".colorize(:red)
@@ -45,7 +45,6 @@ class Favourites
     end
 
     def display_favourites
-        system("clear")
         @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false # Detects if user exists in the favourites database
        
         if @username_check 
@@ -71,16 +70,12 @@ class Favourites
         end
     end
 
-    # Add method to clear favourites for a specific user if you have time!
     def clear
-        @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false # Detects if user exists in the favourites database
-
         PROMPT.select("Are you sure?".underline) do |menu|
             menu.choice "Yes"
             menu.choice "No", -> { exit }
         end
 
-        # Need to delete everything @temp_json["favourites"][1]
         @temp_json["favourites"].each_with_index do |h1, i|
             if h1["username"] == @username
                 @temp_json["favourites"][i].clear

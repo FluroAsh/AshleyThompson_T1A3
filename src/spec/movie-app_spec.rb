@@ -42,18 +42,20 @@ describe 'User' do
     end
 end
 
-describe 'MovieItems' do
-    it 'should return search title' do
-        movie_items = MovieItems.new("Batman")
-        expect(movie_items.search_title).to eq("Batman")
+describe 'MovieItems' do ## Modified 2 tests, creating 4 new tests (2x2)
+    it 'should return a response from the API' do
+        movie_items = MovieItems.new
+        search_title = "Batman"
+        expect(movie_items.fetch_items(search_title).nil?).to be(false)
     end
 
-    it 'should return a response from the API' do
-        movie_items = MovieItems.new("Batman")
-        movie_items.fetch_items
-        movie_items.parse_JSON
+    it 'should return an array of movie items' do
+        movie_items = MovieItems.new
+        search_title = "Batman"
+        movie_items.fetch_items(search_title)
         movie_items.add_items
-        expect(movie_items.display_items).to eq(nil)
+        movie_items.display_items
+        expect(movie_items.movie_items.length > 0).to be(true)
     end
 end
 

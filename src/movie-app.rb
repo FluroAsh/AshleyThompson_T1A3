@@ -1,6 +1,6 @@
 require_relative './lib/environment'
 
-# ARG's for user to pass
+# ARG's for user to pass through the terminal
 if ARGV.length > 0
     flag, *rest = ARGV
     puts "::: ARGUMENT: #{ARGV}"
@@ -23,7 +23,7 @@ if ARGV.length > 0
     when "-info"
         puts "Developed by Ashley Thompson, FX-2021-02 as a part of the CoderAcademy curriculum. Term 1, Assignment 3 (2021)"
         exit
-    when "-usernames" #print usernames that exist from user-details.json
+    when "-usernames"
         system("clear")
         user_data = File.read("./lib/user-details.json")
         temp_json = JSON.parse(user_data)
@@ -54,6 +54,7 @@ if ARGV.length > 0
     end
 end
 
+## Main Application
 # Main Menu
 while true  # Loops until user selects an exit menu.choice
     system("clear")
@@ -109,9 +110,10 @@ while true  # Loops until user selects an exit menu.choice
             
             puts ""
             PROMPT.select("Favourites".underline) do |menu|
+                
                 menu.choice "Add Current", -> { favourite.save_favourite }
-                menu.choice "Clear All", -> { favourite.clear }
                 menu.choice "Display All", -> { favourite.display_favourites }
+                menu.choice "Clear All", -> { favourite.clear }
                 menu.choice "Exit", -> { exit } 
             end
         end 
