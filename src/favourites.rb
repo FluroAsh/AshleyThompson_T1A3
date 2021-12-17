@@ -7,7 +7,6 @@ class Favourites
         @title = title
         @year = year
         @favourites_arr = []
-        
     end
 
     def parse_JSON

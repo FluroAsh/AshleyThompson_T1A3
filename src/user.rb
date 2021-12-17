@@ -38,7 +38,7 @@ class User
         end
     end
 
-    def validate_login 
+    def validate_login
         user_data = File.read(@file_path)
         temp_json = JSON.parse(user_data)
 
