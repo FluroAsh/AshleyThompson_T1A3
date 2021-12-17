@@ -3,14 +3,13 @@ require_relative './lib/environment'
 class MovieItems
     attr_reader :search_title, :movie_items, :choices, :selected_movie
     
-    def initialize(search_title)
-        @search_title = search_title
+    def initialize
         @movie_items = [] # Temp array to hold our search items
         @choices = []
         @selected_movie = nil
     end
 
-    def fetch_items
+    def fetch_items(search_title)
         url = URI("https://movie-database-imdb-alternative.p.rapidapi.com/?s=" + search_title + "&page=1&r=json")
 
         http = Net::HTTP.new(url.host, url.port)
@@ -23,15 +22,13 @@ class MovieItems
         @response = http.request(request)
     end
 
-    def parse_JSON  
-        @api_json = JSON.parse(@response.read_body)
-    end
-
     def add_items 
+        api_json = JSON.parse(@response.read_body)
+
         # Appends whole api_json "Search" to movie_items for later use
-        if @api_json["Response"] == "True"
-            @api_json["Search"].each_with_index do |e, i|
-                @movie_items << e unless @api_json["Search"][i]["Type"] == "series" || @api_json["Search"][i]["Type"] == "game"
+        if api_json["Response"] == "True"
+            api_json["Search"].each_with_index do |e, i|
+                @movie_items << e unless api_json["Search"][i]["Type"] == "series" || api_json["Search"][i]["Type"] == "game"
             end
 
             # Takes values from @movie_items for use in tty-prompt choices

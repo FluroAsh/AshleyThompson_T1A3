@@ -10,6 +10,19 @@ system("clear")
 # - provide at least TWO test cases and the expected results for each test case
 
 # > An outline of the testing procedure and cases should be included with the source code of the application
+#spec_helper.rb
+
+# Writes to ./spec/dev/test-output.txt
+RSpec.configure do |config|
+    original_stdout = $stdout
+    config.before(:all) do 
+      # Redirect stderr and stdout
+      $stdout = File.new(File.join(File.dirname(__FILE__), 'dev', 'test-output.txt'), 'w')
+    end
+    config.after(:all) do 
+      $stdout = original_stdout
+    end
+  end
 
 describe 'User' do
     # Before running 'User' tests, read user-details.json
@@ -35,7 +48,7 @@ describe 'MovieItems' do
         expect(movie_items.search_title).to eq("Batman")
     end
 
-    it 'should return a resposne from the API' do
+    it 'should return a response from the API' do
         movie_items = MovieItems.new("Batman")
         movie_items.fetch_items
         movie_items.parse_JSON
@@ -50,17 +63,36 @@ end
     # parse the file
     # check to see if the response is not nil
 
+#     describe 'Movie' do
+#     it 'should parse the called JSON' do
+#         movie = Movie.new("Batman Begins", "tt0372784")
+#         movie.fetch_items
+        
+#     end
+
+#     it 'should initialize movie attributes' do
+#         movie = Movie.new("Batman Begins", "tt0372784")
+#     end
+
+#     it 'should display movie details' do
+#         movie = Movie.new("Batman Begins", "tt0372784")
+#         movie.fetch_items
+#         movie.parse_JSON
+#         expect(movie.display_md).to eq(nil)
+#     end
+# end
+
 ## 2. Displays an output to our terminal
     # pass imdb_id to fetch_items
     # parse it
     # display_md
     # expect the output to eq nil
 
-
-
-# Creates 2 tests for favourites.rb
-## 1. Stores a favourite movie
-    # checks to see if there is an entry at index 0
+describe 'Favourites' do
+    it 'should succesfully read favourites from favourites.json' do
+        # Check to see if there's an entry at index 0
+    end
 
 ## 2. Retrieves favourites
     # should run without error (return nil)
+end

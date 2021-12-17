@@ -91,12 +91,9 @@ class User
         end
     end
 
-    def search_movie
+    def search_movie(search_title)
         begin 
             system("clear")
-            puts "What movie are you looking for?".colorize(:cyan)
-            print ">> ".colorize(:cyan)
-            @search_title = gets.chomp.strip.gsub(/\s+/, '%20') 
 
             if @search_title.empty?
                 raise StandardError

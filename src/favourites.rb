@@ -1,3 +1,5 @@
+require_relative './lib/environment'
+
 class Favourites
     def initialize(username, title, year)
         @username = username
@@ -13,7 +15,7 @@ class Favourites
         @temp_json = JSON.parse(@favourites_data)
     end
 
-    def save_favourite #TODO: Prevent duplicates of "title" when adding to "user"
+    def save_favourite #TODO?: Prevent duplicates of "title" when adding to "user"
         @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false  
 
         if @username_check # && @title_check == false
@@ -29,7 +31,7 @@ class Favourites
             end
             puts ">> Added movie: \"#{@title}\" to user: \"#{@username}\"! ✅".colorize(:green)
         else
-            # create new user with title
+            # Creates new user with title, year
             puts ">> Did not find: #{@username} favourites database! ❌".colorize(:red)
             puts ">> Creating a new favourites entry for #{@username}... ✅".colorize(:green)
 

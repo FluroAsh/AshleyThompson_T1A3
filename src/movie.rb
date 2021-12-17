@@ -1,8 +1,9 @@
 class Movie
-    attr_reader :selected_movie, :movie_info, :title, :year
+    attr_reader :selected_movie, :movie_info, :title, :year, :imdb_id
 
     def initialize(selected_movie, imdb_id)
         @selected_movie = selected_movie
+        @title = title
         @imdb_id = imdb_id
     end
     
@@ -19,14 +20,9 @@ class Movie
         @response = http.request(request)
     end
 
-    def parse_JSON
-        @api_json = JSON.parse(@response.read_body)
-        # @api_json.sort_by { |key| @api_json["Year"] } unless 
-    end
-
     def display_md
-        system("clear")
-
+        api_json = JSON.parse(@response.read_body)
+        
         # Movie Overview
         table = Terminal::Table.new :headings => 
         [
@@ -40,28 +36,28 @@ class Movie
             "Actors".colorize(:magenta)
             ] do |t|
                 t << [
-                    @api_json["Title"].colorize(:cyan), 
-                    @api_json["Year"].colorize(:yellow),
-                    @api_json["Rated"].colorize(:yellow),
-                    @api_json["Released"].colorize(:yellow),
-                    @api_json["Runtime"].colorize(:yellow),
-                    @api_json["Director"].colorize(:yellow),
-                    @api_json["Genre"].colorize(:yellow),
-                    @api_json["Actors"].colorize(:yellow)
+                    api_json["Title"].colorize(:cyan), 
+                    api_json["Year"].colorize(:yellow),
+                    api_json["Rated"].colorize(:yellow),
+                    api_json["Released"].colorize(:yellow),
+                    api_json["Runtime"].colorize(:yellow),
+                    api_json["Director"].colorize(:yellow),
+                    api_json["Genre"].colorize(:yellow),
+                    api_json["Actors"].colorize(:yellow)
                 ]
             end
             puts table
            
             puts "Plot".underline
-            puts @api_json["Plot"]
+            puts api_json["Plot"]
         
-        unless @api_json["Ratings"].empty? || @api_json["Ratings"].size < 3
+        unless api_json["Ratings"].empty? || api_json["Ratings"].size < 3
             # Ratings Table
             puts ""
             puts "Ratings".underline
 
             ratings = []
-            @api_json["Ratings"].each_with_index { |e| ratings << e.values}
+            api_json["Ratings"].each_with_index { |e| ratings << e.values}
 
             table2 = Terminal::Table.new :headings => 
             [
@@ -71,16 +67,16 @@ class Movie
                 "Metacritic".colorize(:magenta)    
                 ] do |t|
                     t << [ 
-                        @api_json["imdbRating"].colorize(:yellow),
+                        api_json["imdbRating"].colorize(:yellow),
                         ratings[1][1].colorize(:yellow), 
-                        @api_json["Metascore"].colorize(:yellow), 
+                        api_json["Metascore"].colorize(:yellow), 
                         ratings[2][1].colorize(:yellow) 
                     ]
                 end
-                puts table2
         end
             # Save these for use in favourites
-            @title = @api_json["Title"]
-            @year = @api_json["Year"]
+            @title = api_json["Title"]
+            @year = api_json["Year"]
+            puts table2
     end
 end

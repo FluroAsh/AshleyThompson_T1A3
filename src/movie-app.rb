@@ -1,6 +1,29 @@
 require_relative './lib/environment'
 
 ## ARGV's go here
+if ARGV.length > 0
+    flag, *rest = ARGV
+    puts "#{ARGV}"
+    
+    case flag
+    when "-help"
+        puts "Register via the main menu if you don't have a login"
+        puts "----------------------------------------------------"
+        puts "Refer to \"https://github.com/FluroAsh/AshleyThompson_T1A3\" for additional information regarding set-up and use"
+        puts "----------------------------------------------------"
+        puts "The Ruby file can be run using the executable: \"./run.sh\" via the terminal"
+        puts "Dependencies can be installed using \"./install-dependencies\" via the terminal"
+        puts "----------------------------------------------------"
+        puts "#{ARGV}"
+        exit
+    when "-info"
+        puts "Developed by Ashley Thompson, FX-2021-02 as a part of the CoderAcademy curriculum. Term 1, Assignment 3 (2021)"
+        exit
+    # -usernames print usernames that exist from user-details.json
+    # -favourites show saved movies from favourites.txt
+    end
+end
+
 
 # Main Menu
 while true  # Loops until user selects an exit menu.choice
@@ -34,11 +57,14 @@ while true  # Loops until user selects an exit menu.choice
     # Search Menu(s)
     while user.logged_in
         system("clear")
-        movie_items = MovieItems.new(user.search_movie)
-
-        unless user.search_title.size < 3 || user.search_title.start_with?("%20")
-            movie_items.fetch_items
-            movie_items.parse_JSON
+        movie_items = MovieItems.new
+        
+        puts "What movie are you looking for?".colorize(:cyan)
+        print ">> ".colorize(:cyan)
+        search_title = gets.chomp.strip.gsub(/\s+/, '%20') 
+        
+        unless search_title.size < 3 || search_title.start_with?("%20")
+            movie_items.fetch_items(search_title)
 
             # Method returns "False" if nothing was added, 
             # Uses 'Next' to loop back into itself while user.logged_in == true
@@ -52,7 +78,7 @@ while true  # Loops until user selects an exit menu.choice
             
             movie = Movie.new(movie_items.selected_movie, imdb_id)
             movie.fetch_items
-            movie.parse_JSON
+            system("clear")
             movie.display_md
 
             favourite = Favourites.new(user.username, movie.title, movie.year)
