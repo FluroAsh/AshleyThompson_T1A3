@@ -1,6 +1,6 @@
 # Statement of Purpose & Scope
 ## BTW...
-In order to use this application, use the username: **Admin** and password: **foobar123** (or any listed in the .user-details.JSON file, as they all work, albeit with different favourites). 
+In order to use this application, use the username: **Admin** and password: **foobar123** (or any listed in the user-details.JSON file, as they all work, albeit with different favourites). 
 ## High level Description
 At a high level this application will contain a variety of features that predominately serve to navigate a movie API and present this information in an easy to digest way, with various manipulation applied to the data in accordance with the **user**'s search query (which will be provided in the context of movie *title*).
 ## The Problem & Why It's Being Developed
@@ -32,31 +32,33 @@ The above user will make use of the application by entering a movie title which 
 ## How Will User Find Out How to Interact with Each Feature
 The user can find out how to interact with each feature by following the prompts. [tty-prompt](https://github.com/piotrmurach/tty-prompt) does an excellent job at guiding the user visually through various methods such as giving them selectable options that help guide the control flow of the application based on what the user would like to do — styling these options with symbols and colors.
 
-Additionally, there will be various prompts for the user to enter input into the application, as an example — the user will also be presented  
+Additionally, there will be various prompts for the user to enter input into the application, as an example — the user will also be presented with various prompts that are dealt with via error handling to guide them in the right direction and inform them of how to correctly interact with the application.  
+
+## Implemented ARGV's 
+- `-help` — Provides clarity around how to set-up the application and various arguments (below) to provide information outside runtime
+- `-info` — gets information about the projects development (Lead developer, CoderAcademy intake, year etc.)
+- `-usernames` — Retrieves a table of currently stored usernames
+- `-favourites` — Displays a table of currently stored favourites for each user
 
 ## How User will Interact with Each Feature
 The user will interact with each feature via the [tty-prompt](https://github.com/piotrmurach/tty-prompt) interface, selecting various options that dictate the flow of the application. The first stage is the login feature which will allow dynamic retrieval of user data (favourites, as-well as validation of their credentials). 
 
-At various stages of the applications run-time it will prompt the user for input to retrieve data from the [movie API](https://rapidapi.com/rapidapi/api/movie-database-imdb-alternative/) and subsequently display it to the user, allowing them to store a movie item into the favourites.txt document that will be later used to retrieve a list of the user's preferences. 
+At various stages of the applications run-time it will prompt the user for input to retrieve data from the [movie API](https://rapidapi.com/rapidapi/api/movie-database-imdb-alternative/) and subsequently display it to the user, allowing them to store a movie item into the favourites.json document that will be later used to retrieve a list of the user's preferences. 
 
 ## How Errors Will be Handled
-Errors will be predominately handled by the `rescue` method, by catching errors as they arise in blocks of code. Alternatively, errors will be prevented/handled by anticipating how the user will interact with the application and diverting the control flow in a way that allows the user to continue their interaction without exiting (eg: failing a login attempt, and being able to retry).
+Errors will be predominately handled by the `rescue` method, by catching errors as they arise in blocks of code. Additionally, errors will be prevented/handled by anticipating how the user will interact with the application and diverting the control flow (typically with `if/else` or `unless`) in a way that allows the user to continue their interaction without exiting. For example: failing a login attempt, and being rerouted back into the main menu loop; or the search loop if they *are* logged in.
 
 # Control Flow Diagram
-This control flow diagram serves to express what the application intends to do, how the user will interact with it and show the overall process from start to finish given various divergences in the control flow. The diagrams logic may be subject to slight change during the development process to facilitate better user experience and optimisation.
+This control flow diagram serves to express what the application intends to do, how the user will interact with it and show the overall process from start to finish given various divergences in the control flow. The diagrams logic was subjected to slight change during the development process to facilitate better user experience and optimisation. 
+
+This consisted of including additional options within the [tty-prompt](https://github.com/piotrmurach/tty-prompt) menu options, namely logging out, clearing favourites data for the **logged in** user and allowing for the user to be redirected back to the main menu via a break in the nested loop, as opposed to terminating the session.
 ![Control Flow Diagram](../docs/../AshleyThompson_T1A3/docs/control-flow-diagram.png)
 
-# Develop an Implementation Plan
-## Which will: 
-
-- outlines how each feature will be implemented and a checklist of tasks for each feature
-- prioritise the implementation of different features, or checklist items within a feature
-- provide a deadline, duration or other time indicator for each feature or checklist/checklist-item
-
+# Implementation Plan
 1. Menu System
    
    *Implementation*
-   - [x] Login/Create/Exit
+   - [x] Login/Register/Exit
    - [x] Loop back to appropriate menu when input error raised
    - [x] Select `Display/Store` favourite movie
    - [x] Search again prompt
@@ -94,8 +96,8 @@ This control flow diagram serves to express what the application intends to do, 
   
    *Implementation*
    - [x] Execute method based on whether user chooses to **display/store** favourites
-   - [x] Store correct Username, Title & Year in `favourites.txt`
-   - [x] Retrieve Username, Title & Year from `favourites.txt`
+   - [x] Store correct Username, Title & Year in `favourites.json`
+   - [x] Retrieve Username, Title & Year from `favourites.json`
    - [x] Display list of favourites
    - [x] Prompt user to create new search
 
@@ -114,6 +116,7 @@ To install this application clone the repo into your current directory by using 
 You can either run the application through a shell terminal using:
     
     $ ruby movie-app.rb
+
 or alternatively execute the run bash script which will automate this for you:
 
     $ ./run.sh
@@ -121,6 +124,15 @@ or alternatively execute the run bash script which will automate this for you:
 To execute either of these commands your current directory must be `src`.
 
 In order to login to the application you can use the username: `Admin` and password: `foobar123`. Happy movie hunting! 🥳
+## Command Line Arguments
+
+There are also additional `command line arguments` you can pass into the terminal, these include:
+- `-help` — Provides clarity around how to set-up the application and various arguments (below) to provide information outside runtime
+- `-info` — gets information about the projects development (Lead developer, CoderAcademy intake, year etc.)
+- `-usernames` — Retrieves a table of currently stored usernames
+- `-favourites` — Displays a table of currently stored favourites for each user
+
+
 ## Dependencies 
     $ ./install-dependencies
 This will install the required gems for the application to run without errors.
@@ -139,7 +151,3 @@ Minimum Requirements:
 - 1GHz Processor or faster
 - 2GB Ram
 - 1GB of HDD space
-## Supported Operating Systems
-- Windows 
-- Linux
-- MacOS
