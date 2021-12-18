@@ -2,7 +2,7 @@ require_relative './lib/environment'
 
 class Favourites
     attr_reader :favourites_arr
-    
+
     def initialize(username, title, year)
         @username = username
         @file_path = "./lib/favourites.json"
@@ -16,10 +16,10 @@ class Favourites
         @temp_json = JSON.parse(@favourites_data)
     end
 
-    def save_favourite #TODO?: Prevent duplicates of "title" when adding to "user"
-        @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false  
+    def save_favourite
+        @username_check = @temp_json["favourites"].find { |h1| h1["username"] == @username} ? true : false 
 
-        if @username_check # && @title_check == false
+        if @username_check
             @temp_json["favourites"].each_with_index do |hash, i|
                 if hash["username"] == @username
                     new_favourite = {title: @title, year: @year}
@@ -72,21 +72,25 @@ class Favourites
         end
     end
 
-    def clear
-        PROMPT.select("This will remove all favourites from: " + "\"#{@username}\" ".colorize(:cyan) + "Are you sure?".underline) do |menu|
-            menu.choice "Yes"
-            menu.choice "No", -> { exit }
+    def clear(*option)
+        if option == "Skip" # Optional parameter to bypass PROMPT.select
+            PROMPT.select("This will remove all favourites from: " + "\"#{@username}\" ".colorize(:cyan) + "Are you sure?".underline) do |menu|
+                menu.choice "Yes"
+                menu.choice "No", -> { exit }
+            end
         end
+        
+        puts ">> Cleared favourites for \"#{@username}\" ✅".colorize(:green)
 
         @temp_json["favourites"].each_with_index do |h1, i|
             if h1["username"] == @username
                 @temp_json["favourites"][i].clear
-                @temp_json["favourites"].delete({})
+                @temp_json["favourites"].delete({}) # Deletes empty hash remainder
             end
         end
         
         File.open(@file_path, "w") do |f|
             f.puts JSON.pretty_generate(@temp_json)
-            end
+        end
     end
 end

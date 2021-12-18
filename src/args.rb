@@ -26,24 +26,25 @@ if ARGV.length > 0
         user_data = File.read("./lib/user-details.json")
         temp_json = JSON.parse(user_data)
         
-        puts "Usernames".underline.colorize(:green)
-        temp_json["user_data"].each_with_index do |hash, i|
-            puts "#{i + 1}. \"#{temp_json["user_data"][i]["username"]}\""
+        puts "Usernames (ALL)".underline.colorize(:color => :black, :background => :light_white)
+        table = Terminal::Table.new do |t|
+            temp_json["user_data"].each_with_index do |h1, i|  
+                t << [(i + 1).to_s.colorize(:cyan), h1["username"].colorize(:yellow)]
+            end
         end
+        puts table
         exit
     when "-favourites"
         system("clear")
         user_data = File.read("./lib/favourites.json")
         temp_json = JSON.parse(user_data)
 
-        puts "Favourites (ALL)".underline.colorize(:green)
-        puts
-
+        puts "Favourites (ALL)".underline.colorize(:color => :black, :background => :light_white)
         table = Terminal::Table.new :headings => 
         ["Name".colorize(:green), "Title".colorize(:green)] do |t|
             temp_json["favourites"].each_with_index do |h1, i|
                 h1["movies"].each do |h2|
-                    t << [temp_json["favourites"][i]["username"], h2["title"]]
+                    t << [temp_json["favourites"][i]["username"].colorize(:cyan), h2["title"].colorize(:yellow)]
                 end
             end
         end
