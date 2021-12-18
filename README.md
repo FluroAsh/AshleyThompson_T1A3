@@ -52,7 +52,7 @@ Errors will be predominately handled by the `rescue` method, by catching errors 
 This control flow diagram serves to express what the application intends to do, how the user will interact with it and show the overall process from start to finish given various divergences in the control flow. The diagrams logic was subjected to slight change during the development process to facilitate better user experience and optimisation. 
 
 This consisted of including additional options within the [tty-prompt](https://github.com/piotrmurach/tty-prompt) menu options, namely logging out, clearing favourites data for the **logged in** user and allowing for the user to be redirected back to the main menu via a break in the nested loop, as opposed to terminating the session.
-![Control Flow Diagram](../docs/../AshleyThompson_T1A3/docs/control-flow-diagram.png)
+![Control Flow Diagram](../AshleyThompson_T1A3/docs/control-flow-diagram.png)
 
 # Implementation Plan
 1. Menu System
