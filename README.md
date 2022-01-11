@@ -1,3 +1,6 @@
+### Github Link: 
+https://github.com/FluroAsh/AshleyThompson_T1A3
+
 # Statement of Purpose & Scope
 ## BTW...
 In order to use this application, use the username: **Admin** and password: **foobar123** (or any listed in the user-details.JSON file, as they all work, albeit with different favourites). 
@@ -52,7 +55,7 @@ Errors will be predominately handled by the `rescue` method, by catching errors 
 This control flow diagram serves to express what the application intends to do, how the user will interact with it and show the overall process from start to finish given various divergences in the control flow. The diagrams logic was subjected to slight change during the development process to facilitate better user experience and optimisation. 
 
 This consisted of including additional options within the [tty-prompt](https://github.com/piotrmurach/tty-prompt) menu options, namely logging out, clearing favourites data for the **logged in** user and allowing for the user to be redirected back to the main menu via a break in the nested loop, as opposed to terminating the session.
-![Control Flow Diagram](../AshleyThompson_T1A3/docs/control-flow-diagram.png)
+![Control Flow Diagram](docs/control-flow-diagram.png)
 
 # Implementation Plan
 1. Menu System
@@ -106,6 +109,13 @@ This consisted of including additional options within the [tty-prompt](https://g
 
 The current method to track this implementation plan will be done through a [Trello board](https://trello.com/b/W2bSAate/t1a3ashleythompson).
 
+## Trello Screenshots
+![Trello Screenshot 1](docs/trello1.PNG)
+![Trello Screenshot 2](docs/trello2.PNG)
+![Trello Screenshot 3](docs/trello3.PNG)
+![Trello Screenshot 4](docs/trello4.PNG)
+![Trello Screenshot 5](docs/trello5.PNG)
+
 # Help Documentation
 ## Installation
 To install this application clone the repo into your current directory by using the `git clone` command:
@@ -151,3 +161,4 @@ Minimum Requirements:
 - 1GHz Processor or faster
 - 2GB Ram
 - 1GB of HDD space
+
