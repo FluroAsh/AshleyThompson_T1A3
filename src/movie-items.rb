@@ -19,7 +19,7 @@ class MovieItems
 
         request = Net::HTTP::Get.new(url)
         request["x-rapidapi-host"] = 'movie-database-imdb-alternative.p.rapidapi.com'
-        request["x-rapidapi-key"] = '95bf4e37b4mshe8cb692a716b2e3p190df5jsnb5e4f313f0e0'
+        request["x-rapidapi-key"] = $api_key
         @response = http.request(request)
     end
 

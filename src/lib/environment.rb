@@ -11,6 +11,7 @@ require_relative '../user'
 require_relative '../favourites'
 require_relative '../movie'
 require_relative '../movie-items'
+require_relative '../../.api_key.rb'
 
 # Default gems
 require 'json'
